@@ -1,0 +1,75 @@
+{% if source != "reference" %}
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>BrewBlog Reference</title>
+    <link href="../css/universal_elements.css" rel="stylesheet" type="text/css">
+    <link href="../css/html_elements.css" rel="stylesheet" type="text/css">
+    <link href="../css/reference.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% else %}
+    <script language="javascript">
+        <!--
+        function jumpMenu(targ, selObj, restore) { //v3.0
+            eval(targ + ".location='" + selObj.options[selObj.selectedIndex].value + "'");
+            if (restore) selObj.selectedIndex = 0;
+        }
+        //-->
+    </script>
+    <table>
+        <tr>
+            <td class="dataLabelLeft">Choose:</td>
+            <td class="data">
+                <form name="form" id="form">
+                    <select name="referenceMenu" onchange="jumpMenu('parent',this,0)">
+                        <option value="?page=reference"></option>
+                        {% for section, name in sections %}
+                            <option value="?page=reference&section={{ section|url_encode }}"
+                                    {% if current_section == section %}selected="selected" {% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br>
+{% endif %}
+{% if current_section == "carbonation" %}
+<p>Due to readability, the carbonation chart is housed in a pop-up window. To view, enable Javascript, adjust your
+    browser's settings to allow this site to display pop-up windows, and then
+    {% if print_browser == "IE" %}
+        <a href="#"
+           onclick="window.open('reference/carbonation.php','','height=600,width=900, scrollbars=yes, toolbar=yes, resizable=yes, menubar=yes'); return false;">click
+            here</a>
+    {% else %}
+        <a href="reference/carbonation.php?KeepThis=true&TB_iframe=true&height=550&width=900" class="thickbox"
+           title="Carbonation Chart">click here</a>
+    {% endif %}
+    to view the chart.
+    {% endif %}
+
+<div id="wideWrapperReference">
+    {{ content }}
+</div>
+{% if source == "reference" %}
+<div class="calcNav">
+    <p>
+        {% for section, name in sections %}
+            {% if current_section == section %}
+                <strong>{{ name }}</strong>
+            {% else %}
+                <a href="?page=reference&section={{ section|url_encode }}">{{ name }}</a>
+            {% endif %}
+            {% if not loop.last %}
+                |
+            {% endif %}
+        {% endfor %}
+    </p>
+</div>
+</body>
+</html>
+{% else %}
+    {{ footer }}
+{% endif %}

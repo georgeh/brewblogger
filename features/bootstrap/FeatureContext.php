@@ -4,7 +4,8 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
     Behat\Behat\Context\BehatContext,
     Behat\Behat\Exception\PendingException,
-    Behat\MinkExtension\Context\MinkContext;
+    Behat\MinkExtension\Context\MinkContext,
+    Behat\Mink\Exception\ExpectationException;
 
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
@@ -51,13 +52,27 @@ class FeatureContext extends MinkContext
     public function assertBrewBloggerPage($page)
     {
         $actual = $this->getSession()->getCurrentUrl();
-        $params = parse_str(parse_url($actual, PHP_URL_QUERY));
-        if (isset($params['page']) && ($params['page'] == $page)) {
+        $params = parse_url($actual, PHP_URL_QUERY);
+        parse_str($params);
+        if (!isset($params['page']) || ($params['page'] == $page)) {
             $message = sprintf("Current BrewBlogger page %s not found in current url %s", $page, $actual );
-            throw new \Behat\Mink\Exception\ExpectationException($message, $this->getSession());
+            throw new ExpectationException($message, $this->getSession());
         }
     }
 
+    /**
+     * @Given /^I should be on the section "([^"]*)"$/
+     */
+    public function iShouldBeOnTheSection($section)
+    {
+        $actual = $this->getSession()->getCurrentUrl();
+        $params = parse_url($actual, PHP_URL_QUERY);
+        parse_str($params);
+        if (!isset($params['section']) || ($params['section'] == $section)) {
+            $message = sprintf("Current BrewBlogger section %s not found in current url %s", $section, $actual);
+            throw new ExpectationException($message, $this->getSession());
+        }
+    }
 
     /**
      * @Given /^there are no awards$/

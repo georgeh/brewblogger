@@ -170,9 +170,8 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
     $content .= include(SECTIONS . 'about.inc.php');
     $tplVars['page_title'] = 'About';
 } elseif ($page == "reference") {
-    ob_start();
-    include(SECTIONS . 'reference.inc.php');
-    $content .= ob_get_clean();
+    $content .= include(SECTIONS . 'reference.inc.php');
+    $tplVars['page_title'] = 'Reference';
 } elseif (($row_pref['allowCalendar'] == "Y") && ($page == "calendar")) {
     ob_start();
     include(SECTIONS . 'calendar.inc.php');
