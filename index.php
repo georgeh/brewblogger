@@ -1,59 +1,60 @@
 <?php
 require_once('vendor/autoload.php');
 
-require ('paths.php');
-require_once (CONFIG.'config.php');
+require('paths.php');
+require_once(CONFIG . 'config.php');
 
 //choose SQL table and set up functions to user authentication and
 //navbar configuration for login/logout links
-require (INCLUDES.'authentication_nav.inc.php'); session_start();
+require(INCLUDES . 'authentication_nav.inc.php');
+session_start();
 
 //override various default settings with GET parameters, if they exist
-include (INCLUDES.'url_variables.inc.php');
+include(INCLUDES . 'url_variables.inc.php');
 
 //set up brewers, themes, etc.
-include (INCLUDES.'db_connect_universal.inc.php');
+include(INCLUDES . 'db_connect_universal.inc.php');
 
 //set up recipes, brewlogs, etc.
-include (INCLUDES.'db_connect_log.inc.php');
+include(INCLUDES . 'db_connect_log.inc.php');
 
 //include various conversions functions, date functions and truncate functions
 //plus additional libs for 
 //    titles.inc.php - set up the navigation?
 //    messages.inc.php - tooltips and a few messages
 //    scrubber.inc.php - a few arrays for character replacement
-include (INCLUDES.'functions.inc.php');
+include(INCLUDES . 'functions.inc.php');
 
 //figure out SRM and a hex value for displaying beer color
 //include (INCLUDES.'color.inc.php');
 
 // Load color library functions
-require_once (ADMIN_LIBRARY.'color.lib.php');
+require_once(ADMIN_LIBRARY . 'color.lib.php');
 
 //determine if club edition or personal edition is in use
-include (INCLUDES.'version.inc.php');
+include(INCLUDES . 'version.inc.php');
 
 // Load constants
-require_once (ADMIN_INCLUDES.'constants.inc.php');
+require_once(ADMIN_INCLUDES . 'constants.inc.php');
 
 $imageSrc = "images/";
 
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/twig/');
-$twig = new Twig_Environment($loader, array(
-    'debug' => true,
+$twig   = new Twig_Environment($loader, array(
+    'debug'      => true,
     'autoescape' => false,
 ));
 $twig->addExtension(new Twig_Extension_Debug());
 
-$tplVars = array();
-$tplVars['name'] = isset($row_name)?$row_name:null;
-$tplVars['pref'] = isset($row_pref)?$row_pref:null;
-$tplVars['log'] = isset($row_log)?$row_log:null;
+$tplVars         = array();
+$tplVars['name'] = isset($row_name) ? $row_name : null;
+$tplVars['pref'] = isset($row_pref) ? $row_pref : null;
+$tplVars['log']  = isset($row_log) ? $row_log : null;
 
 
 $tplVars['brewerLogName'] = $row_name['brewerLogName'];
-$tplVars['brewerName'] = trim($row_name['brewerFirstName'] . ' ' . $row_name['brewerLastName']);
-$tplVars['version'] = $version;
+$tplVars['brewerName']    = trim($row_name['brewerFirstName'] . ' ' . $row_name['brewerLastName']);
+$tplVars['version']       = $version;
 
 
 if ($row_pref['mode'] == "1") {
@@ -66,17 +67,17 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail") || ($page == "re
     $tplVars['title'] .= " [" . $row_log['brewStyle'] . "]";
 }
 
-$tplVars['checkmobile'] = checkmobile();
-$tplVars['theme'] = $row_pref['theme'];
-$tplVars['page'] = $page;
-$tplVars['section'] = $section;
+$tplVars['checkmobile']  = checkmobile();
+$tplVars['theme']        = $row_pref['theme'];
+$tplVars['page']         = $page;
+$tplVars['section']      = $section;
 $tplVars['printBrowser'] = $printBrowser;
 
 ob_start();
 include INCLUDES . 'navigation.inc.php';
 $tplVars['navigation'] = ob_get_clean();
 
-$tplVars['breadcrumb'] = $breadcrumb;
+$tplVars['breadcrumb']        = $breadcrumb;
 $tplVars['totalRows_newsGen'] = $totalRows_newsGen;
 
 ob_start();
@@ -84,7 +85,7 @@ include SECTIONS . 'news.inc.php';
 $tplVars['news'] = ob_get_clean();
 
 $tplVars['imageSrc'] = $imageSrc;
-$tplVars['icon'] = $icon;
+$tplVars['icon']     = $icon;
 
 $content = '';
 if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
@@ -173,13 +174,10 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
     $content .= include(SECTIONS . 'reference.inc.php');
     $tplVars['page_title'] = 'Reference';
 } elseif (($row_pref['allowCalendar'] == "Y") && ($page == "calendar")) {
-    ob_start();
-    include(SECTIONS . 'calendar.inc.php');
-    $content .= ob_get_clean();
+    $content .= include(SECTIONS . 'calendar.inc.php');
+    $tplVars['page_title'] = 'Calendar';
 } elseif (($row_pref['allowCalendar'] == "N") && ($page == "calendar")) {
-    ob_start();
-    echo "<p class=\"error\">This feature has been disabled by the site administrator.</p>";
-    $content .= ob_get_clean();
+    $content .= '<p class="error">This feature has been disabled by the site administrator.</p>';
 } elseif (($row_pref['mode'] == "2") && ($page == "members")) {
     ob_start();
     include(SECTIONS . 'memberList.inc.php');
@@ -227,7 +225,7 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
 }
 $tplVars['body'] = $content;
 
-$topSidebar = '';
+$topSidebar    = '';
 $bottomSidebar = '';
 if ($page == "about") {
     ob_start();
@@ -333,14 +331,14 @@ if ($page == "profile") {
     $bottomSidebar .= ob_get_clean();
 }
 
-$tplVars['topSidebar'] = $topSidebar;
+$tplVars['topSidebar']    = $topSidebar;
 $tplVars['bottomSidebar'] = $bottomSidebar;
 
 ob_start();
-include(INCLUDES.'footer.inc.php');
+include(INCLUDES . 'footer.inc.php');
 $tplVars['footer'] = ob_get_clean();
 
-$tplVars['filter'] = isset($filter)?$filter:null;
-$tplVars['user2'] = isset($row_user2)?$row_user2:null;
+$tplVars['filter'] = isset($filter) ? $filter : null;
+$tplVars['user2']  = isset($row_user2) ? $row_user2 : null;
 
 echo $twig->render('index.html.twig', $tplVars);

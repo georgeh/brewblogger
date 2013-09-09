@@ -1,0 +1,135 @@
+<a class="webcalSubscribe" href="webcal://{{ ical_url }}{% if filter is not empty %}?filter={{ filter|url_encode }}{% endif %}">Subscribe
+    to Calendar</a>
+{% if pref.mode == "2" %}
+    <form name="form" id="form">
+        <table class="dataTable">
+            <tr>
+                <td class="dataLabelLeft">Filter By Member:</td>
+                <td class="data">
+                    <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+                        <option value="index.php?page=calendar"{% if filter == "all" %} selected="selected"{% endif %}>
+                            Club Brewing Calendar
+                        </option>
+                        {% for member in members %}
+                            <option value="index.php?page=calendar&filter={{ member.user_name|url_encode }}"{% if filter == member.user_name %} selected="selected"{% endif %}>{{ member.realFirstName }}
+                                {{ member.realLastName }}</option>
+                        {% endfor %}
+                    </select>
+                    <br/>
+                    <br/>
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endif %}
+
+<table class="calendar">
+    <tr>
+        <td colspan="7" class="header">
+            <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%">
+                <tr>
+                    <td width="20%" align="left" class=one
+                    "><a href="?page=calendar&filter=$filter&date={{ previous_month }}"><img src="images/arrow_left.png"
+                                                                                             border="0"
+                                                                                             title="Previous Month"></a></td>
+                    <td width="60%" align="center" class="text_16_bold">{{ month_name }} {{ year }}</td>
+                    <td width="20%" align="right" class=one
+                    "><a href="?page=calendar&filter=$filter&date={{ next_month }}"><img src="images/arrow_right.png"
+                                                                                         border="0" title="Next Month"></a></td>
+                </tr>
+            </table>
+        </td>
+    <tr>
+        <td width="15%" class="weekdays">Sunday</td>
+        <td width="14%" class="weekdays">Monday</td>
+        <td width="14%" class="weekdays">Tuesday</td>
+        <td width="14%" class="weekdays">Wednesday</td>
+        <td width="14%" class="weekdays">Thursday</td>
+        <td width="14%" class="weekdays">Friday</td>
+        <td width="15%" class="weekdays">Saturday</td>
+    </tr>
+    {% for week in weeks %}
+    <tr>
+        {% for day in week %}
+        <td class="{% if day.today %}today{% elseif day.thismonth %}monthdays{% else %}nonmonthdays{% endif %}"><a
+                    href="index.php?page=calendar&filter={{ filter|url_encode }}&date={{ day.today0 }}">{{ day.day }}</a>
+            <table class="none">
+                {% for brew in day.planned %}
+                    <tr>
+                        <td valign="top" class="calInfo">Plan:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.brew %}
+                    <tr>
+                        <td valign="top" class="calInfo">Brew:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.secondary %}
+                    <tr>
+                        <td valign="top" class="calInfo">Sec:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.tertiary %}
+                    <tr>
+                        <td valign="top" class="calInfo">Ter:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.lager %}
+                    <tr>
+                        <td valign="top" class="calInfo">Lag:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.age %}
+                    <tr>
+                        <td valign="top" class="calInfo">Age:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.tap %}
+                    <tr>
+                        <td valign="top" class="calInfo">Tap:</td>
+                        <td valign="top" class="calInfo"><a
+                                    href="index.php?page=brewBlogDetail&filter={{ brew.brewBrewerID|url_encode }}&id={{ brew.id|url_encode }}">{{ brew.truncatedName }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for brew in day.upcoming %}
+                    <tr>
+                        <td valign="top" class="none">Up:</td>
+                        <td valign="top" class="calInfo">
+                            {% if brew.upcomingRecipeID is not empty %}
+                                <a href="?page=recipeDetail&filter={{ brew.brewerID }}&id={{ brew.upcomingRecipeID }}">{{ brew.truncatedName }}</a>
+                            {% else %}
+                                {{ brew.truncatedName }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="7" class="header" align="center">
+            {% if override_date %}<a href="?page=calendar">Reset to Today</a>{% endif %}
+        </td>
+    </tr>
+</table>

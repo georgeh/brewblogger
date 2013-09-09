@@ -45,6 +45,18 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * Goes to a date in the calendar
+     *
+     * @Given /^(?:|I )am on the calendar page for "(?P<date>[^"]+)"$/
+     * @When /^(?:|I )go to the calendar page for "(?P<date>[^"]+)"$/
+     */
+    public function goToCalendarDate($date)
+    {
+        $unixTime = strtotime($date);
+        $this->getSession()->visit($this->locatePath("index.php?page=calendar&date=" . $unixTime));
+    }
+
+    /**
      * Checks, that current page page is the one in the route (not URL).
      *
      * @Then /^(?:|I )should be on the page "(?P<page>[^"]+)"$/
