@@ -1,0 +1,32 @@
+<table class="dataTable">
+    <tr>
+        <td class="dataHeadingList" colspan="2">Member Name&nbsp;<a href=""><img src="{{ image_src }}sort_up.gif"
+                                                                                 border="0" alt="Sort Ascending"></a><a
+                    href=""><img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a></td>
+        <td class="dataHeadingList" colspan="2">BrewBlogs</td>
+        <td class="dataHeadingList" colspan="2">Recipes</td>
+        <td class="dataHeadingList" colspan="2">Awards/Comps</td>
+        {% for member in members %}
+    <tr style="background-color:{{ cycle([color1, color2], loop.index) }}">
+        <td width="1%" class="dataList">{% if member.userInfoPrivate == "Y" %}<img
+                src="{{ image_src }}user.png">{% else %}&nbsp;{% endif %}</td>
+        <td width="34%" class="dataList">{% if member.userInfoPrivate == "Y" %}<a
+                    href="index.php?page=profile&filter={{ member.user_name|url_encode }}">{% endif -%}
+                {{ member.realFirstName }} {{ member.realLastName }}
+                {%- if member.userInfoPrivate == "Y" %}</a>{% if member.userPosition != "" %}
+            <span class="text_9">&nbsp;&nbsp;<em>{{ member.userPosition }}</em></span>{% endif %}</td>
+        <td class="dataList">{{ member.brewingTotal }}&nbsp;&nbsp;</td>
+        <td width="25%" class="dataList">{% if member.brewingTotal > 0 %}<a
+                href="index.php?page=brewBlogList&filter={{ member.user_name|url_encode }}&sort=brewDate&dir=DESC">
+                    View &raquo;</a>{% else %}&nbsp;{% endif %}</td>
+        <td class="dataList">{{ member.recipeTotal }}&nbsp;&nbsp;</td>
+        <td width="25%" class="dataList">{% if member.recipeTotal > 0 %}<a
+                href="index.php?page=recipeList&filter={{ member.user_name|url_encode }}">
+                    View &raquo;</a>{% else %}&nbsp;{% endif %}</td>
+        <td class="dataList">{{ member.awardTotal }}</td>
+        <td width="25%" class="dataList">{% if member.awardTotal > 0 %}<a
+                href="index.php?page=awardsList&sort=awardBrewName&dir&ASC&filter={{ member.user_name|url_encode }}">
+                    View &raquo;</a>{% else %}&nbsp;{% endif %}</td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,88 @@
+<div class="data-container">
+    <table>
+        {% if brewing_count > 0 %}
+            <tr>
+                <td class="data-icon"><img src="{{ image_src }}book.png"></td>
+                <td class="data"><a
+                            href="index.php?page=brewBlogList&filter={{ filter|url_encode }}&sort=brewDate&dir=DESC">View
+                        {{ member.realFirstName }}'s {{ pref.menuBrewBlogs }}</a></td>
+            </tr>
+        {% endif %}
+        {% if recipe_count > 0 %}
+        <tr>
+            <td class="data-icon"><img src="{{ image_src }}script.png"></td>
+            <td class="data"><a
+                        href="index.php?page=recipeList&filter={{ filter|url_encode }}">View
+                    {{ member.realFirstName }}'s {{ pref.menuRecipes }}</a></td>
+        </tr>
+        {% endif %}
+    </table>
+    <table class="dataTable">
+        {% if member.userInfoPrivate == "Y" %}
+            {% if member.userBrewingSince != "" %}
+                <tr>
+                    <td valign="top" class="dataLabelLeft">Brewing Since:</td>
+                    <td valign="top" class="data">{{ member.userBrewingSince }}</td>
+                </tr>
+            {% endif %}
+            {% if member.userPosition != "" %}
+                <tr>
+                    <td valign="top" class="dataLabelLeft">Current Club Position:</td>
+                    <td valign="top" class="data">{{ member.userPosition }}</td>
+                </tr>
+            {% endif %}
+            {% if member.userPastPosition != "" %}
+                <tr>
+                    <td valign="top" class="dataLabelLeft">Past Club Positions:</td>
+                    <td valign="top" class="data">{{ member.userPastPosition }}</td>
+                </tr>
+            {% endif %}
+            {% if member.userOccupation != "" %}
+                <tr>
+                    <td valign="top" class="dataLabelLeft">Occupation:</td>
+                    <td valign="top" class="data">{{ member.userOccupation }}</td>
+                </tr>
+            {% endif %}
+            {% if member.userHometown != "" %}
+                <tr>
+                    <td valign="top" class="dataLabelLeft">Hometown:</td>
+                    <td valign="top" class="data">{{ member.userHometown }}</td>
+                </tr>
+            {% endif %}
+            {% if member.userFavQuote != "" %}
+                <tr>
+                <td valign="top" class="dataLabelLeft">Favorite Quote:</td>
+                <td valign="top" class="data">{{ member.userFavQuote }}</td>
+                </tr>{% endif %}
+            {% if member.userFavStyles != "" %}
+                <tr>
+                <td valign="top" class="dataLabelLeft">Favorite Styles:</td>
+                <td valign="top" class="data">{{ member.userFavStyles }}</td>
+                </tr>{% endif %}
+            {% if member.userFavCommercial != "" %}
+                <tr>
+                <td valign="top" class="dataLabelLeft">Favorite Commercial Brew:</td>
+                <td valign="top" class="data">{{ member.userFavCommercial }}</td>
+                </tr>{% endif %}
+            {% if (member.userWebsiteName != "") and (member.userWebsiteURL != "") %}
+                <tr>
+                <td valign="top" class="dataLabelLeft">Personal Website:</td>
+                <td valign="top" class="data"><a href="{{ member.userWebsiteURL }}"
+                                                 target="_blank">{{ member.userWebsiteName }}</a></td>
+                </tr>{% endif %}
+            {% if member.userProfile != "" %}
+                <tr>
+                    <td valign="top" class="dataLabelLeft">Profile:</td>
+                    <td valign="top" class="data">{{ member.userProfile }}</td>
+                </tr>
+            {% endif %}
+
+        {% else %}
+            <tr>
+                <td valign="top" class="error">{{ member.realFirstName }}  {{ member.realLastName }}'s
+                    profile is not available.
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+</div>

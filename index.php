@@ -179,13 +179,10 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
 } elseif (($row_pref['allowCalendar'] == "N") && ($page == "calendar")) {
     $content .= '<p class="error">This feature has been disabled by the site administrator.</p>';
 } elseif (($row_pref['mode'] == "2") && ($page == "members")) {
-    ob_start();
-    include(SECTIONS . 'memberList.inc.php');
-    $content .= ob_get_clean();
+    $content .= include(SECTIONS . 'memberList.inc.php');
+    $tplVars['page_title'] = 'Members';
 } elseif (($row_pref['mode'] == "2") && ($page == "profile")) {
-    ob_start();
-    include(SECTIONS . 'profile.inc.php');
-    $content .= ob_get_clean();
+    $content .= include(SECTIONS . 'profile.inc.php');
 } elseif (($row_pref['mode'] == "2") && ($page == "news")) {
     ob_start();
     include(SECTIONS . 'news.inc.php');
