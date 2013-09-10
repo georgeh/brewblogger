@@ -91,9 +91,7 @@ $tplVars['page_title'] = $page_title;
 $content = '';
 if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
     if ($row_pref['allowSpecifics'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_specifics.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_specifics.inc.php';
     }
 
     if ($row_pref['allowGeneral'] == "Y") {
@@ -189,9 +187,7 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
 } elseif ($page == "recipeDetail") {
     // Include sections according to set preferences
     if ($row_pref['allowSpecifics'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'recipe_specifics.inc.php');
-        $content .= ob_get_clean();
+        $content .= include(SECTIONS . 'recipe_specifics.inc.php');
     }
     if ($row_pref['allowGeneral'] == "Y") {
         ob_start();

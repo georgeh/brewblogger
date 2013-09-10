@@ -1,0 +1,183 @@
+<style type="text/css">
+    <!--
+    #help {
+        margin: -5px 0 0 -18px;
+    }
+
+    -->
+</style>
+<div class="data-container">
+    <div class="split-container">
+        <div class="split-left-two-column">
+            <div class="data-item-container">
+                <div class="data-label">{% if (page != "recipePrint") and (page != "logPrint") %}
+                    <div id="help"><a
+                                href="sections/reference.inc.php?section=styles&source=log&KeepThis=true&TB_iframe=true&height=450&width=800"
+                                title="BJCP Style Reference" class="thickbox"><img
+                                    src="{{ image_src }}information.png" align="absmiddle" border="0"
+                                    alt="Reference"></a></div>{% endif %}Style:
+                </div>
+                <div class="data-regular">
+                    {% if (page == "recipePrint") or (page == "logPrint") %}
+                        {{ log.brewStyle }}
+                    {% else %}
+                        <div id="moreInfo">
+                            {% if style_count > 0 %}<a href="#">{% endif %}
+                                {{ log.brewStyle }}
+                                {% if style_count > 0 %}<span><div id="moreInfoWrapper">{{ style_include }}</div></span></a>&nbsp;<a
+                                href="{{ style.brewStyleLink }}" target="_blank"><img src="{{ image_src }}link.png"
+                                                                                      align="absmiddle" border="0"
+                                                                                      alt="Click for more information about {{ log.brewStyle }} from the BJCP website."
+                                                                                      title="Click for more information about {{ log.brewStyle }} from the BJCP website."></a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if pref.mode == "2" %}
+                <div class="data-item-container">
+                    <div class="data-label">{% if (page =="recipeDetail") or (page =="recipePrint") %}Contributor:{% else %}Brewer:{% endif %}</div>
+                    <div class="data-regular">{% if log.brewBrewerID is empty %}{{ name.brewerFirstName }}&nbsp;{{ name.brewerLastName }}{% else %}{{ user2.realFirstName }}&nbsp;{{ user2.realLastName }}{% endif %}</div>
+                </div>
+            {% endif %}
+            {% if page not in ['recipeDetail', 'recipePrint'] %}
+                <div class="data-item-container">
+                    <div class="data-label">Brew Date:</div>
+                    <div class="data-regular">{{ log.brewDate|date("F j, Y") }}</div>
+                </div>
+            {% endif %}
+            {% if log.brewTapDate is not empty %}
+                <div class="data-item-container">
+                    <div class="data-label">Tap Date:</div>
+                    <div class="data-regular">{{ log.brewTapDate|date("F j, Y") }}</div>
+                </div>
+            {% endif %}
+            {% if log.brewYield is not empty %}
+                <div class="data-item-container">
+                    <div class="data-label">Yield:</div>
+                    <div class="data-regular">{% if action in ['default', 'print', 'reset'] %}{{ log.brewYield }}{% endif %}{% if action == "scale" %}{{ amt }}{% endif %}&nbsp;{{ pref.measFluid2 }}</div>
+                </div>
+            {% endif %}
+
+            <div class="data-item-container">
+                <div class="data-label">Bitterness:</div>
+                <div class="data-regular">{{ log.brewBitterness_formatted }}&nbsp;{{ pref.measBitter }}
+                    {% if log.brewIBUFormula is not empty %}({{ log.brewIBUFormula }}){% endif %}
+                </div>
+            </div>
+
+            {% if (log.brewOG is not empty) and (log.brewFG is not empty) %}
+                {% if log.brewBitterness is not empty %}
+                    <div class="data-item-container">
+                        <div class="data-label">BU/GU:</div>
+                        <div class="data-regular">{{ log.bu_gu_ratio }}</div>
+                    </div>
+                {% endif %}
+                <div class="data-item-container">
+                    <div class="data-label">Calories:</div>
+                    <div class="data-regular">{{ log.calories }} (12 ounces)</div>
+                </div>
+
+                <div class="data-item-container">
+                    <div class="data-label">ABV:</div>
+                    <div class="data-regular">{{ log.abv }}%</div>
+                </div>
+                <div class="data-item-container">
+                    <div class="data-label">ABW:</div>
+                    <div class="data-regular">{{ log.abw }}%</div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="split-right-two-column">
+            {% if log.brewLovibond is not empty %}
+                <div class="data-item-container">
+                    <div class="data-label">
+                        {% if pagee not in ['recipePrint', 'logPrint'] %}
+                            <div id="help"><a
+                                        href="sections/reference.inc.php?section=color&source=log&KeepThis=true&TB_iframe=true&height=350&width=600"
+                                        title="SRM Color Reference" class="thickbox"><img
+                                            src="{{ image_src }}information.png" align="absmiddle" border="0"
+                                            alt="Reference"></a></div>
+                            Color ({{ pref.measColor }}):
+                        {% endif %}
+                    </div>
+                    <div class="data-regular">
+                        {% if page in ['logPrint'] %}
+                            {{ log.brewLovibond_rounded }}
+                        {% else %}
+                            <span class="color-display"
+                                  style="background: {{ log.brewLovibond_bgcolor }}; color: {% if log.srm >= 15 %}#ffffff;{% else %}#000000;{% endif %}">{{ log.brewLovibond_rounded }}</span>&nbsp;
+                            ({% if log.brewColorFormula is empty %}Formula Unknown{% else %}{{ log.brewColorFormula }}{% endif %})
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if page not in ['recipeDetail', 'recipePrint'] %}
+                {% if log.brewTargetOG is not empty %}
+                    <div class="data-item-container">
+                        <div class="data-label">Target OG:</div>
+                        <div class="data-regular">{{ log.brewTargetOG|number_format(3) }}</div>
+                    </div>
+                {% endif %}
+                {% if log.brewTargetFG is not empty %}
+                    <div class="data-item-container">
+                        <div class="data-label">Target FG:</div>
+                        <div class="data-regular">{{ log.brewTargetFG|number_format(3) }}</div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if log.brewOG is not empty %}
+                <div class="data-item-container">
+                    <div class="data-label">OG:</div>
+                    <div class="data-regular">{{ log.brewOG|number_format(3) }}&nbsp;({{ log.brewOG_plato }}&deg; P)
+                    </div>
+                </div>
+            {% endif %}
+            {% if page not in ['recipeDetail', 'recipePrint'] %}
+            {% if log.brewGravity1 is not empty %}
+            <div class="data-item-container">
+                <div class="data-label">Reading 1:</div>
+                <div class="data-regular">{{ log.brewGravity1 }}{% if log.brewGravity1Days is not empty %}&nbsp;({{ log.brewGravity1Days }} days){% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if log.brewGravity2 is not empty %}
+                <div class="data-item-container">
+                <div class="data-label">Reading 2:</div>
+                <div class="data-regular">{{ log.brewGravity2 }}{% if log.brewGravity2Days is not empty %}&nbsp;({{ log.brewGravity2Days }} days){% endif %}</div>
+                </div>
+            {% endif %}
+            {% endif %}
+            {% if log.brewFG is not empty %}
+                <div class="data-item-container">
+                    <div class="data-label">FG:</div>
+                    <div class="data-regular">{{ log.brewFG|number_format(3) }}&nbsp;({{ log.brewFG_plato }}&deg; P)
+                    </div>
+                </div>
+            {% endif %}
+            {% if (log.brewOG is not empty) and (log.brewFG is not empty) %}
+                <div class="data-item-container">
+                    <div class="data-label">Real Extract:</div>
+                    <div class="data-regular">{{ log.extract }}&deg; P</div>
+                </div>
+                <div class="data-item-container">
+                    <div class="data-label">Attenuation:</div>
+                    <div class="data-regular">{{ log.app_atten }}% (A) / {{ log.real_atten }}% (R)</div>
+                </div>
+            {% endif %}
+            {% if (page not in ['recipeDetail', 'recipePrint']) %}
+                {% if  log.brewStatus is not empty %}
+                    <div class="data-item-container">
+                        <div class="data-label">Status:</div>
+                        <div class="data-regular">{{ log.brewStatus }}</div>
+                    </div>
+                {% endif %}
+                {% if log.brewCondition is not empty %}
+                    <div class="data-item-container">
+                        <div class="data-label">Conditioning:</div>
+                        <div class="data-regular">{{ log.brewCondition }}</div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
