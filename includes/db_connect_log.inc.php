@@ -33,8 +33,8 @@ if ($row_pref['mode'] == "2") {
 mysql_select_db($database_brewing, $brewing);
 $query_news = "SELECT * FROM news";
 if ($page == $row_pref['home']) $query_news .= " ORDER BY newsDate DESC LIMIT 2";
-if (($page == "news") && ($view != "all")) $query_news .= " WHERE newsPrivate='Y' ORDER BY $sort $dir LIMIT $view";
-if (($page == "news") && ($view == "all")) $query_news .= " WHERE newsPrivate='Y' ORDER BY $sort $dir";
+if (($page == "news") && ($view != "all")) $query_news .= " WHERE newsPrivate='Y' ORDER BY newsdate $dir LIMIT 5";
+if (($page == "news") && ($view == "all")) $query_news .= " WHERE newsPrivate='Y' ORDER BY newsdate $dir";
 $news = mysql_query($query_news, $brewing) or die(mysql_error());
 $row_news = mysql_fetch_assoc($news);
 $totalRows_news = mysql_num_rows($news);

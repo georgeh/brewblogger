@@ -1,0 +1,82 @@
+{% if page != "news" %}
+    <div id="{% if page in ['brewBlogCurrent', 'brewBlogDetail','recipeDetail','about'] %}subtitle{% else %}subtitleWide{% endif %}">
+        <div id="icon"><img src="{{ image_src }}newspaper.png" align="baseline"></div>
+        Club News/Announcements
+    </div>
+{% else %}
+    <table class="dataTable">
+        {% if (news_count >= 5) %}
+            <tr>
+                <td width="90%">&nbsp;</td>
+                <td width="10%" class="text_9">Limit View To&nbsp;
+                    {% if (news_count >= 5) and (news_count < 15) %}
+                        <a href="?page=news&sort={{ sort|url_encode }}&dir={{ dir|url_encode }}&view=5">5</a>&nbsp;
+                    {% elseif (news_count >= 15) and (news_count < 25) %}
+                        <a href="?page=news&sort={{ sort|url_encode }}&dir={{ dir|url_encode }}&view=15">15</a>&nbsp;
+                    {% elseif (news_count >= 25) %}
+                        <a href="?page=news&sort={{ sort|url_encode }}&dir={{ dir|url_encode }}&view=25">25</a>&nbsp;
+                    {% endif %}
+                    News Items
+                </td>
+            </tr>
+        {% endif %}
+
+        {% if (view != "all") and (news_count > view) %}
+            <tr>
+                <td width="90%">&nbsp;</td>
+                <td width="10%" class="text_9 right"><a
+                            href="?page=news&sort={{ sort|url_encode }}&dir={{ dir|url_encode }}&view=all">All
+                        News &gt;&gt;</a>
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+{% endif %}
+<table class="dataTable" style="margin-bottom: 15px;">
+    <tr>
+        <td class="dataLeft">Members,
+            {% if logged_in and (news_count > 0) %}
+                <a href="admin/index.php?action=view&dbTable=news">click here</a>
+            {% else %}
+                <a href="?page=login">login</a>
+            {% endif %}
+            to view club-only news.
+        </td>
+    </tr>
+</table>
+{% for post in news %}
+    {% if post.newsPrivate == "Y" %}
+        <div class="headerContentAdmin">{{ post.newsHeadline }}</div>
+        <table class="dataTable" style="margin-bottom: 15px;">
+            <tr>
+                <td>&nbsp;</td>
+                <td class="text_9 right bknd_ultra_lt" width="10%" nowrap="nowrap">
+                    &nbsp;Posted {{ post.newsDate|date("F j, Y") }}
+                    by {{ post.newsPoster }}&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2"
+                    style="padding-top: 5px;">{% if page == "news" %}{{ post.newsText }}{% else %}{{ post.truncated_text }}{% endif %}</td>
+            </tr>
+            {% if page != "news" %}
+                <?php if ($page != "news") { ?>
+                <tr>
+                    <td colspan="2" style="padding-top: 5px;" class="text_9">
+                        <div align="right"><a href="?page=news&sort=newsDate&dir=DESC&view=5">Read the Entire
+                                Post &gt;&gt;</a></div>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+    {% endif %}
+{% endfor %}
+
+{% if (news_count > 2) and (page != "news") %}
+    <table class="dataTable">
+        <tr>
+            <td width="90%">&nbsp;</td>
+            <td width="10%" class="text_9"><a href="?page=news&sort=newsDate&dir=DESC&view=5">More News
+                    &gt;&gt;</a></td>
+        </tr>
+    </table>
+{% endif %}

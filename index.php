@@ -86,6 +86,7 @@ $tplVars['news'] = ob_get_clean();
 
 $tplVars['imageSrc'] = $imageSrc;
 $tplVars['icon']     = $icon;
+$tplVars['page_title'] = $page_title;
 
 $content = '';
 if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
@@ -184,9 +185,7 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
 } elseif (($row_pref['mode'] == "2") && ($page == "profile")) {
     $content .= include(SECTIONS . 'profile.inc.php');
 } elseif (($row_pref['mode'] == "2") && ($page == "news")) {
-    ob_start();
-    include(SECTIONS . 'news.inc.php');
-    $content .= ob_get_clean();
+    $content .= include(SECTIONS . 'news.inc.php');
 } elseif ($page == "recipeDetail") {
     // Include sections according to set preferences
     if ($row_pref['allowSpecifics'] == "Y") {
