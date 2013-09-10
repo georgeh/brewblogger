@@ -1,4 +1,4 @@
-This is my attempt to refactor [BrewBlogger] to much better code, and ultimately add features that I want.
+This is my attempt to refactor [BrewBlogger](http://brewblogger.net/) to much better code, and ultimately add features that I want.
 
 The plan of attack is:
 
