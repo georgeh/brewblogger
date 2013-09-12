@@ -1,0 +1,105 @@
+<a name="tasting" id="tasting"></a>
+<div class="headerContent">Tasting Reviews</div>
+<div class="data-container">
+    <table class="dataTable">
+        <tr>
+            <td class="dataLeft" width="1%"><img src="{{ image_src }}page_edit.png" align="absmiddle" border="0"></td>
+            <td class="data" width="10%">{{ reviews|length }}&nbsp;Review{% if reviews|length != 1 %}s{% endif %}</td>
+            <td class="data" width="1%"><img src="{{ image_src }}page_add.png" align="absmiddle" border="0">
+            <td class="data" width="10%" nowrap><a
+                        href="sections/add_review.inc.php?id={{ log.id }}&KeepThis=true&TB_iframe=true&height=450&width=800"
+                        title="Submit a Review for {{ log.brewName }}" class="thickbox">Submit a Review</a></td>
+            <td class="data" width="1%"><img src="{{ image_src }}arrow_refresh.png" align="absmiddle" border="0"></td>
+            <td class="data" nowrap><a href="JavaScript:location.reload(true);">Refresh Page</a></td>
+            {% if reviews|length > 5 %}
+                <td class="data" width="1%"><img src="{{ image_src }}eye.png" align="absmiddle" border="0"></td>
+                <td class="data">{% if view == "all" %}<a
+                        href="index.php?page={{ page|url_encode }}&filter={{ filter|url_encode }}&id={{ id|url_encode }}&view=limited#tasting">
+                            View Latest 5</a>{% else %}<a
+                        href="index.php?page={{ page|url_encode }}&filter={{ filter|url_encode }}&id={{ id|url_encode }}&view=all#tasting">
+                            View All</a>{% endif %}</td>
+            {% endif %}
+        </tr>
+    </table>
+    {% if reviews is not empty %}
+        <table class="text_10 dataTable">
+            <tr>
+                <td class="dataLeft" width="1%"><img src="{{ image_src }}star.png" align="absmiddle" border="0"/></td>
+                <td class="data" width="10%" nowrap>45-50 = Outstanding</td>
+                <td class="data" width="1%"><img src="{{ image_src }}award_star_silver_2.png" align="absmiddle"
+                                                 border="0"/></td>
+                <td class="data" width="10%" nowrap>30-37 = Very Good</td>
+                <td class="data" width="1%"><img src="{{ image_src }}bell.png" align="absmiddle" border="0"/></td>
+                <td class="data" nowrap>14-20 = Fair</td>
+            </tr>
+            <tr>
+                <td class="dataLeft"><img src="{{ image_src }}award_star_gold_2.png" align="absmiddle" border="0"/></td>
+                <td class="data" nowrap>38-44 = Excellent</td>
+                <td class="data"><img src="{{ image_src }}award_star_bronze_2.png" align="absmiddle" border="0"/></td>
+                <td class="data" nowrap>21-29 = Good</td>
+                <td class="data"><img src="{{ image_src }}emoticon_unhappy.png" align="absmiddle" border="0"/></td>
+                <td class="data" nowrap>00-13 = Problematic</td>
+            </tr>
+        </table>
+
+        {% for review in reviews %}
+            <div id="wideWrapperReview">
+                <div id="referenceHeader"><span class="data-icon"><img src="{{ image_src }}page_edit.png"
+                                                                       align="absmiddle" border="0"></span><span
+                            class="data">Review by {{ review.brewScoredBy }}{% if review.brewScorerLevel is not empty %}({{ review.brewScorerLevel }}){% endif %}</span>
+                </div>
+                <table class="dataTable">
+                    <tr bgcolor="{{ color1 }}">
+                        <td class="dataLabelLeft">Aroma:</td>
+                        <td class="data" width="15%" nowrap>{{ review.brewAromaScore }} / 12</td>
+                        <td class="data" width="75%">{{ review.brewAromaInfo }}</td>
+                    </tr>
+                    <tr bgcolor="{{ color2 }}">
+                        <td class="dataLabelLeft">Appearance:</td>
+                        <td class="data">{{ review.brewAppearanceScore }} / 3</td>
+                        <td class="data">{{ review.brewAppearanceInfo }}</td>
+                    </tr>
+                    <tr bgcolor="{{ color1 }}">
+                        <td class="dataLabelLeft">Flavor:</td>
+                        <td class="data">{{ review.brewFlavorScore }} / 20</td>
+                        <td class="data">{{ review.brewFlavorInfo }}</td>
+                    </tr>
+                    <tr bgcolor="{{ color2 }}">
+                        <td class="dataLabelLeft">Mouthfeel:</td>
+                        <td class="data">{{ review.brewMouthfeelScore }} / 5</td>
+                        <td class="data">{{ review.brewMouthfeelInfo }}</td>
+                    </tr>
+                    <tr bgcolor="{{ color1 }}">
+                        <td class="dataLabelLeft">Overall Impression:</td>
+                        <td class="data">{{ review.brewOverallScore }} / 10</td>
+                        <td class="data">{{ review.brewOverallInfo }}</td>
+                    </tr>
+                    <tr bgcolor="{{ color2 }}">
+                        <td class="dataLabelLeft">Cumulative Score:</td>
+                        <td class="data" nowrap>{{ review.taste_calc }} / 50</td>
+                        <td class="data dataLabel">
+                            {% if (review.taste_calc >= 45) %}<span class="data-icon">
+                                <img src="{{ image_src }}star.png" align="absmiddle" border="0"></span><span class="dk data">Outstanding</span>
+                            {% endif %}
+                            {% if (review.taste_calc >= 38) and (review.taste_calc <= 44) %}
+                                <span class="data-icon"><img src="{{ image_src }}award_star_gold_2.png" align="absmiddle" border="0"></span><span class="dk data">Excellent</span>
+                            {% endif %}
+                            {% if (review.taste_calc >= 30) and (review.taste_calc <= 37) %}
+                                <span class="data-icon"><img src="{{ image_src }}award_star_silver_2.png" align="absmiddle" border="0"></span><span class="dk data">Very Good</span>
+                            {% endif %}
+                            {% if (review.taste_calc >= 21) and (review.taste_calc <= 29) %}
+                                <span class="data-icon"><img src="{{ image_src }}award_star_bronze_2.png" align="absmiddle" border="0"></span><span class="dk data">Good</span>
+                            {% endif %}
+                            {% if (review.taste_calc >= 14) and (review.taste_calc <= 20) %}
+                                <span class="data-icon"><img src="{{ image_src }}bell.png" align="absmiddle" border="0"></span><span class="dk data">Fair</span>
+                            {% endif %}
+                            {% if (review.taste_calc >= 00) and (review.taste_calc <= 13) %}
+                                <span class="data-icon"><img src="{{ image_src }}bell_error.png" align="absmiddle" border="0"></span><span class="dk data">Problematic</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

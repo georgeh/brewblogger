@@ -1,47 +1,52 @@
-<?php if ($row_log['brewEquipProfile'] != "") { ?>
-<div class="headerContent">Equipment Profile</div>
-<div class="data-container">
-<h3><em><?php echo $row_equip_profiles['equipProfileName']; ?></em></h3>
-<table class="dataTable">
-<tr>
-    <td class="dataLabelLeft">Batch Size:</td>
-   	<td class="data" width="15%" nowrap="nowrap"><?php if (($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) echo volumeconvert($row_equip_profiles['equipBatchSize'], "liters"); else echo $row_equip_profiles['equipBatchSize']; echo " ".$row_pref['measFluid2']; ?></td>
-   	<td class="dataLabel">Boil Volume:</td>
-    <td class="data" nowrap="nowrap"><?php if (($row_equip_profiles['equipBoilVolume'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) echo volumeconvert($row_equip_profiles['equipBoilVolume'], "liters"); else echo $row_equip_profiles['equipBoilVolume']; echo " ".$row_pref['measFluid2']; ?></td>
-</tr>
-<tr>	
-    <td class="dataLabelLeft">Evaporation Rate:</td>
-    <td class="data" width="15%" nowrap="nowrap"><?php if ($row_equip_profiles['equipEvapRate'] != "") echo $row_equip_profiles['equipEvapRate']."% per hour"; ?></td>
-   	<td class="dataLabel">Mash Tun Dead Space:</td>
-   	<td class="data"><?php if (($row_equip_profiles['equipMashTunDeadspace'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) echo volumeconvert($row_equip_profiles['equipMashTunDeadspace'], "liters"); else echo $row_equip_profiles['equipMashTunDeadspace']; echo " ".$row_pref['measFluid2']; ?></td>
-</tr>
-<tr>
-   	<td class="dataLabelLeft">Efficiency:</td>
-    <td class="data"><?php if ($row_equip_profiles['equipTypicalEfficiency'] != "") echo $row_equip_profiles['equipTypicalEfficiency']."%"; ?></td>
-	<td class="dataLabel">Mash Tun Weight:</td>
-   	<td class="data"><?php if (($row_equip_profiles['equipMashTunWeight'] != "") && ($row_pref['measWeight2'] == "kilograms") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) echo weightconvert($row_equip_profiles['equipMashTunWeight'], "kilograms"); else echo $row_equip_profiles['equipMashTunWeight']; echo " ".$row_pref['measWeight2'];  ?></td>
-</tr>
-<tr>   
-    <td class="dataLabelLeft">Hop Utilization:</td>
-   	<td class="data"><?php if ($row_equip_profiles['equipHopUtil'] != "") echo $row_equip_profiles['equipHopUtil']."%"; ?></td>  
-   	<td class="dataLabel">Mash Tun Volume:</td>
-   	<td class="data"><?php if (($row_equip_profiles['equipMashTunVolume'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) echo volumeconvert($row_equip_profiles['equipMashTunVolume'], "liters"); else echo $row_equip_profiles['equipMashTunVolume']; echo " ".$row_pref['measFluid2']; ?></td>
-</tr>
-<tr>
-    <td class="dataLabelLeft">Loss:</td>
-    <td class="data"><?php if (($row_equip_profiles['equipLoss'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) echo volumeconvert($row_equip_profiles['equipLoss'], "liters"); else echo $row_equip_profiles['equipLoss']; echo " ".$row_pref['measFluid2']; ?></td>
-    <td class="dataLabel">Mash Tun Specific Heat:</td>
-   	<td class="data"><?php if ($row_equip_profiles['equipMashTunSpecificHeat'] != "") echo $row_equip_profiles['equipMashTunSpecificHeat']."  Cal/gram per &deg;C"; ?></td>
-</tr>
-<?php if ($row_equip_profiles['equipNotes'] != "") { ?>
-<tr>
-    <td class="dataLabelLeft">Notes:</td>
-    <td class="data" colspan="3"><?php if ($row_equip_profiles['equipNotes'] != "") echo $row_equip_profiles['equipNotes']; ?></td>
-</tr>
-<?php } ?>
-</table>
-</div>
-<?php } ?>
+<?php
+
+$equip = array();
+if ($row_log['brewEquipProfile'] != "") {
+    $equip = $row_equip_profiles;
+    if (($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) {
+        $equip['equipBatchSize_converted'] = volumeconvert($row_equip_profiles['equipBatchSize'], "liters");
+    } else {
+        $equip['equipBatchSize_converted'] = $row_equip_profiles['equipBatchSize'];
+    }
+
+    if (($row_equip_profiles['equipBoilVolume'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) {
+        $equip['equipBoilVolume_converted'] = volumeconvert($row_equip_profiles['equipBoilVolume'], "liters");
+    } else {
+        $equip['equipBoilVolume_converted'] = $row_equip_profiles['equipBoilVolume'];
+    }
+
+    if (($row_equip_profiles['equipMashTunDeadspace'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) {
+        $equip['equipMashTunDeadspace_converted'] = volumeconvert($row_equip_profiles['equipMashTunDeadspace'], "liters");
+    } else {
+        $equip['equipMashTunDeadspace_converted'] = $row_equip_profiles['equipMashTunDeadspace'];
+    }
+
+    if (($row_equip_profiles['equipMashTunWeight'] !="") && ($row_pref['measWeight2'] == "kilograms") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) {
+        $equip['equipMashTunWeight_converted'] = volumeconvert($row_equip_profiles['equipMashTunWeight'], "liters");
+    } else {
+        $equip['equipMashTunWeight_converted'] = $row_equip_profiles['equipMashTunWeight'];
+    }
+
+    if (($row_equip_profiles['equipMashTunVolume'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) {
+        $equip['equipMashTunVolume_converted'] = volumeconvert($row_equip_profiles['equipMashTunVolume'], "liters");
+    } else {
+        $equip['equipMashTunVolume_converted'] = $row_equip_profiles['equipMashTunVolume'];
+    }
+
+    if (($row_equip_profiles['equipLoss'] !="") && ($row_pref['measFluid2'] == "liters") && ($row_equip_profiles['equipBrewerID'] == "brewblogger")) {
+        $equip['equipLoss_converted'] = volumeconvert($row_equip_profiles['equipLoss'], "liters");
+    } else {
+        $equip['equipLoss_converted'] = $row_equip_profiles['equipLoss'];
+    }
+}
+
+return $twig->render('recipe/equipment.html.twig', array(
+    'pref' => $row_pref,
+    'log' => $row_log,
+    'equip_profile' => $equip,
+));
+
+
 
 
 

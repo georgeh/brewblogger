@@ -1,0 +1,12 @@
+{% if page != "recipePrint" %}
+    {% if log.brewComments is not empty %}
+        <div class="headerContent">Comments</div>
+        <div class="data-container">
+            <table class="dataTable">
+                <tr>
+                    <td valign="top">{{ log.brewComments }}</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+{% endif %}

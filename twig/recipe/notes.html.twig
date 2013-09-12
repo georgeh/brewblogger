@@ -1,0 +1,10 @@
+{% if log.brewNotes is not empty %}
+<div class="headerContent">Notes</div>
+<div class="data-container">
+    <table class="dataTable">
+        <tr>
+            <td valign="top">{{ log.brewNotes }}</td>
+        </tr>
+    </table>
+</div>
+{% endif %}

@@ -1,0 +1,35 @@
+{% if log.brewMethod is not empty %}
+    <div class="headerContent">General Information</div>
+    <div class="data-container">
+        <table class="dataTable">
+            <tr>
+                <td class="dataLabelLeft">Method:</td>
+                <td class="data">{{ log.brewMethod }}</td>
+            </tr>
+            {% if page in ['recipeDetail', 'recipePrint'] %}
+                <?php if (($page =="recipeDetail") || ($page =="recipePrint")) { ?>
+                {% if log.brewSource is not empty %}
+                    <tr>
+                        <td class="dataLabelLeft">Source:</td>
+                        <td class="data">{{ log.brewSource }}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            {% if page not in ['recipeDetail', 'recipePrint'] %}
+            {% if log.brewCost is not empty %}
+                <tr>
+                    <td class="dataLabelLeft">Cost:</td>
+                    <td class="data">{{ log.brewCost }}</td>
+                </tr>
+            {% endif %}
+        </table>
+        <table>
+            {% if log.brewInfo is not empty %}
+                <tr>
+                    <td>{{ log.brewInfo }}</td>
+                </tr>
+            {% endif %}
+            {% endif %}
+        </table>
+    </div>
+{% endif %}

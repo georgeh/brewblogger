@@ -1,0 +1,181 @@
+{% if (pref.mashDisplayMethod == "1") and (log.brewMashProfile is not empty) %}
+    <div class="headerContent">Mash Profile</div>
+    <div class="data-container">
+        <h3><em>{{ mash.mashProfileName }}</em></h3>
+        <table class="dataTable">
+            <tr>
+                <td class="dataLabelLeft">Grain Temperature:</td>
+                <td class="data" width="15%">{{ mash.mashGrainTemp }}&deg;{{ pref.measTemp }}</td>
+                <td class="dataLabel data" width="10%">Tun Temperature:</td>
+                <td class="data">{{ mash.mashTunTemp }}&deg;{{ pref.measTemp }}</td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Sparge Temperature:</td>
+                <td class="data">{{ mash.mashSpargeTemp }}&deg;{{ pref.measTemp }}</td>
+                <td class="dataLabel data">PH:</td>
+                <td class="data">{{ mash.mashPH }}</td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">{{ mash.ppg_label }}</td>
+                <td class="data">{{ mash.ppg_calc }}</td>
+                <td class="dataLabel data">{% if mash.calc_efficiency is not empty %}Efficiency:{% endif %}</td>
+                <td class="data">{{ mash.calc_efficiency }}</td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Notes:</td>
+                <td class="data" colspan="3">{{ mash.mashNotes }}</td>
+            </tr>
+        </table>
+        {% if mash.steps|length > 0 %}
+            <h3>Steps</h3>
+            <table class="dataTable">
+                <tr>
+                    <td class="dataHeadingLeft" width="5%" nowrap="nowrap">#</td>
+                    <td class="dataHeading" width="25%">Name</td>
+                    <td class="dataHeading" width="5%" nowrap="nowrap">Type</td>
+                    <td class="dataHeading" width="5%" nowrap="nowrap">Time</td>
+                    <td class="dataHeading" width="5%" nowrap="nowrap">Temp.</td>
+                    <td class="dataHeading" width="50%">Description</td>
+                </tr>
+                {% for step in mash.steps %}
+                    <tr>
+                        <td class="dataLeft">{{ step.stepNumber }}</td>
+                        <td class="data">{{ step.stepName }}</td>
+                        <td class="data">{{ step.stepType }}</td>
+                        <td class="data" nowrap>{{ step.stepTime }} min.</td>
+                        <td class="data" nowrap>{{ step.steTemp_adjusted }}&deg;{{ pref.measTemp }}</td>
+                        <td class="data">{{ step.stepDescription }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endif %}
+{% if (pref.mashDisplayMethod == "2") or ((pref.mashDisplayMethod == "1") and (log.brewMashProfile == "")) %}
+    {% if log.brewMashType is not empty %}
+        <div class="headerContent">Mash</div>
+        <div class="data-container">
+            <table class="dataTable">
+                <tr>
+                    <td width="50%">
+                        <table>
+                            <tr>
+                                <td class="dataLabelLeft">Mash Type:</td>
+                                <td class="data">{{ log.brewMashType }}</td>
+                            </tr>
+                            {% if log.brewMashPH is not empty %}
+                                <tr>
+                                    <td class="dataLabelLeft">Mash PH:</td>
+                                    <td class="data">{{ log.brewMashPH }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if log.brewMashGrainWeight is not empty %}
+                                <tr>
+                                    <td class="dataLabelLeft">Grain Amt.</td>
+                                    <td class="data">{% if action == "default" %}{{ log.brewMashGrainWeight }}{% elseif action =="scale" %}{{ log.brewMashGrainWeight_scaled|number_format(2) }}{% endif %}
+                                        &nbsp;{{ pref.measWeight2 }}</td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <td class="dataLabelLeft">{{ log.ppg_label }}</td>
+                                <td class="data">{{ log.ppg_calc }}</td>
+                            </tr>
+                            <tr>
+                                <td class="dataLabelLeft">{% if log.calc_efficiency is not empty %}Efficiency:{% endif %}</td>
+                                <td class="data">{% if log.calc_efficiency is not empty %}{{ log.calc_efficiency }}%{% endif %}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table>
+                            {% if log.brewMashGrainTemp is not empty %}
+                                <tr>
+                                    <td class="dataLabelLeft">Grain Temp.</td>
+                                    <td class="data">{{ log.brewMashGrainTemp }}&deg; {{ pref.measTemp }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if log.brewMashTunTemp is not empty %}
+                                <tr>
+                                    <td class="dataLabelLeft">Tun Temp.</td>
+                                    <td class="data">{{ log.brewMashTunTemp }}&deg; {{ pref.measTemp }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if log.brewMashSpargAmt is not empty %}
+                                <?php if ($row_log['brewMashSpargAmt'] != "" ) { ?>
+                                <tr>
+                                    <td class="dataLabelLeft">Sparge Amt.</td>
+                                    <td class="data">{% if action == "default" %}{{ log.brewMashSpargAmt }}{% elseif action =="scale" %}{{ log.brewMashSpargAmt_scaled|number_format(2) }}{% endif %}
+                                        &nbsp;{{ pref.measFluid2 }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if log.brewMashSpargeTemp is not empty %}
+                                <tr>
+                                    <td class="dataLabelLeft">Sparge Temp.</td>
+                                    <td class="data">{{ log.brewMashSpargeTemp }}&deg; {{ pref.measTemp }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if log.brewMashEquipAdjust is not empty %}
+                                <tr>
+                                    <td class="dataLabelLeft">Equip. Adj.?</td>
+                                    <td class="data">{{ log.brewMashEquipAdjust }}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </td>
+                </tr>
+                {% if log.brewMashStep1Name is not empty %}
+                    <tr>
+                        <td colspan="2">
+                            <table width="100%">
+                                <tr>
+                                    <td class="dataLabelLeft">Step</td>
+                                    <td class="dataLabel data">Description</td>
+                                    <td class="dataLabel data">Temp.</td>
+                                    <td class="dataLabel data">Time</td>
+                                </tr>
+                                <tr>
+                                    <td class="dataLeft">{{ log.brewMashStep1Name }}</td>
+                                    <td class="data">{{ log.brewMashStep1Desc }}</td>
+                                    <td class="data">{{ log.brewMashStep1Temp }}&deg; {{ pref.measTemp }}</td>
+                                    <td class="data">{{ log.brewMashStep1Time }}&nbsp;min.</td>
+                                </tr>
+                                {% if log.brewMashStep2Name is not empty %}
+                                    <tr>
+                                        <td class="dataLeft">{{ log.brewMashStep2Name }}</td>
+                                        <td class="data">{{ log.brewMashStep2Desc }}</td>
+                                        <td class="data">{{ log.brewMashStep2Temp }}&deg; {{ pref.measTemp }}</td>
+                                        <td class="data">{{ log.brewMashStep2Time }}&nbsp;min.</td>
+                                    </tr>
+                                {% endif %}
+                                {% if log.brewMashStep3Name is not empty %}
+                                    <tr>
+                                        <td class="dataLeft">{{ log.brewMashStep3Name }}</td>
+                                        <td class="data">{{ log.brewMashStep3Desc }}</td>
+                                        <td class="data">{{ log.brewMashStep3Temp }}&deg; {{ pref.measTemp }}</td>
+                                        <td class="data">{{ log.brewMashStep3Time }}&nbsp;min.</td>
+                                    </tr>
+                                {% endif %}
+                                {% if log.brewMashStep4Name is not empty %}
+                                    <tr>
+                                        <td class="dataLeft">{{ log.brewMashStep4Name }}</td>
+                                        <td class="data">{{ log.brewMashStep4Desc }}</td>
+                                        <td class="data">{{ log.brewMashStep4Temp }}&deg; {{ pref.measTemp }}</td>
+                                        <td class="data">{{ log.brewMashStep4Time }}&nbsp;min.</td>
+                                    </tr>
+                                {% endif %}
+                                {% if log.brewMashStep5Name is not empty %}
+                                    <tr>
+                                        <td class="dataLeft">{{ log.brewMashStep5Name }}</td>
+                                        <td class="data">{{ log.brewMashStep5Desc }}</td>
+                                        <td class="data">{{ log.brewMashStep5Temp }}&deg; {{ pref.measTemp }}</td>
+                                        <td class="data">{{ log.brewMashStep5Time }}&nbsp;min.</td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+    {% endif %}
+{% endif %}

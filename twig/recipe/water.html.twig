@@ -1,0 +1,132 @@
+{% if (pref.waterDisplayMethod == "1") and (log.brewWaterProfile is not empty) %}
+    <div class="headerContent">Water Profile</div>
+    <div class="data-container">
+        <h3><em>{{ water.waterName }}</em></h3>
+        <table class="dataTable">
+            {% if water.waterCalcium is not empty %}
+                <tr>
+                    <td class="dataLabelLeft" width="10%">Calicum:</td>
+                    <td class="data">{{ water.waterCalcium }} ppm</td>
+                </tr>
+            {% endif %}
+            {% if water.waterBicarbonate is not empty %}
+                <tr>
+                    <td class="dataLabelLeft" width="10%">Bicarbonate:</td>
+                    <td class="data">{{ water.waterBicarbonate }} ppm</td>
+                </tr>
+            {% endif %}
+            {% if water.waterSulfate is not empty %}
+                <tr>
+                    <td class="dataLabelLeft" width="10%">Sulfate:</td>
+                    <td class="data">{{ water.waterSulfate }} ppm</td>
+                </tr>
+            {% endif %}
+            {% if water.waterChloride is not empty %}
+                <tr>
+                    <td class="dataLabelLeft" width="10%">Chloride:</td>
+                    <td class="data">{{ water.waterChloride }} ppm</td>
+                </tr>
+            {% endif %}
+            {% if water.waterSodium is not empty %}
+                <tr>
+                    <td class="dataLabelLeft" width="10%">Sodium:</td>
+                    <td class="data">{{ water.waterSodium }} ppm</td>
+                </tr>
+            {% endif %}
+            {% if water.waterMagnesium is not empty %}
+                <tr>
+                    <td class="dataLabelLeft" width="10%">Magnesium:</td>
+                    <td class="data">{{ water.waterMagnesium }} ppm</td>
+                </tr>
+            {% endif %}
+            {% if water.waterPH is not empty %}
+                <tr>
+                    <td class="dataLabelLeft">PH:</td>
+                    <td class="data">{{ water.waterPH }}%</td>
+                </tr>
+            {% endif %}
+            {% if water.waterNotes is not empty %}
+                <tr>
+                    <td class="dataLabelLeft">Notes:</td>
+                    <td class="data">{{ water.waterNotes }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endif %}
+{% if (pref.waterDisplayMethod == "2") and (log.brewWaterName is not empty) %}
+    <div class="headerContent">Water Profile</div>
+    <div class="data-container">
+        <table class="dataTable">
+            <tr>
+                <td width="50%">
+                    <table>
+                        <tr>
+                            <td class="dataLabelLeft">Source:</td>
+                            <td class="dataLeft">{{ log.brewWaterName }}</td>
+                        </tr>
+                        {% if log.brewWaterSulfate is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Sulfate:</td>
+                                <td class="data">{{ log.brewWaterSulfate }}&nbsp;ppm</td>
+                            </tr>
+                            <{% endif %}
+                        {% if log.brewWaterPH is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">PH:</td>
+                                <td class="data">{{ log.brewWaterPH }}</td>
+                            </tr>
+                            <{% endif %}
+                        {% if log.brewWaterCalcium is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Calcium:</td>
+                                <td class="data">{{ log.brewWaterCalcium }}&nbsp;ppm</td>
+                            </tr>
+                            <{% endif %}
+                        {% if log.brewWaterMagnesium is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Magnesium:</td>
+                                <td class="data">{{ log.brewWaterMagnesium }}&nbsp;ppm</td>
+                            </tr>
+                            <{% endif %}
+                    </table>
+                </td>
+
+                <td width="50%">
+                    <table>
+                        {% if log.brewWaterAmount is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Amount:</td>
+                                <td class="data">{{ log.brewWaterAmount }}&nbsp;{{ pref.measFluid2 }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if log.brewWaterChloride is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Chloride:</td>
+                                <td class="data">{{ log.brewWaterChloride }}&nbsp;ppm</td>
+                            </tr>
+                            <{% endif %}
+                        {% if log.brewWaterSodium is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Sodium:</td>
+                                <td class="data">{{ log.brewWaterSodium }}&nbsp;ppm</td>
+                            </tr>
+                            <{% endif %}
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        {% if log.brewWaterNotes is not empty %}
+                            <tr>
+                                <td class="dataLabelLeft">Notes:</td>
+                                <td class="data" colspan="3">{{ log.brewWaterNotes }}</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endif %}

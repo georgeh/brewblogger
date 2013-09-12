@@ -95,61 +95,43 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
     }
 
     if ($row_pref['allowGeneral'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_general.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_general.inc.php';
     }
 
     if ($row_pref['allowComments'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_comments.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_comments.inc.php';
     }
 
     if ($row_pref['allowRecipe'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe.inc.php';
     }
 
-    ob_start();
-    include SECTIONS . 'recipe_equipment.inc.php';
-    $content .= ob_get_clean();
+
+    $content .= include SECTIONS . 'recipe_equipment.inc.php';
+
 
     if ($row_pref['allowMash'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_mash.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_mash.inc.php';
     }
 
     if ($row_pref['allowWater'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_water.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_water.inc.php';
     }
 
     if ($row_pref['allowProcedure'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_procedure.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_procedure.inc.php';
     }
 
     if ($row_pref['allowSpecialProcedure'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_special_procedure.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_special_procedure.inc.php';
     }
 
     if ($row_pref['allowFermentation'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_fermentation.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_fermentation.inc.php';
     }
 
     if (!checkmobile() && $row_pref['allowReviews'] == "Y") {
-        ob_start();
-        include SECTIONS . 'recipe_reviews.inc.php';
-        $content .= ob_get_clean();
+        $content .= include SECTIONS . 'recipe_reviews.inc.php';
     }
 
 } elseif ($page == "brewBlogList") {
@@ -190,29 +172,19 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
         $content .= include(SECTIONS . 'recipe_specifics.inc.php');
     }
     if ($row_pref['allowGeneral'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'recipe_general.inc.php');
-        $content .= ob_get_clean();
+        $content .= include(SECTIONS . 'recipe_general.inc.php');
     }
     if ($row_pref['allowRecipe'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'recipe.inc.php');
-        $content .= ob_get_clean();
+        $content .= include(SECTIONS . 'recipe.inc.php');
     }
     if ($row_pref['allowProcedure'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'recipe_procedure.inc.php');
-        $content .= ob_get_clean();
+        $content .= include(SECTIONS . 'recipe_procedure.inc.php');
     }
     if ($row_pref['allowFermentation'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'recipe_fermentation.inc.php');
-        $content .= ob_get_clean();
+        $content .= include(SECTIONS . 'recipe_fermentation.inc.php');
     }
     if ($row_pref['allowComments'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'recipe_notes.inc.php');
-        $content .= ob_get_clean();
+        $content .= include(SECTIONS . 'recipe_notes.inc.php');
     }
 }
 $tplVars['body'] = $content;
