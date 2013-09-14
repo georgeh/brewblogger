@@ -1,4 +1,4 @@
 <?php
 return $twig->render('recipe/special_procedure.html.twig', array(
-    'log' => $brewLog,
+    'log' => $row_log,
 ));

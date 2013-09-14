@@ -1,6 +1,6 @@
 <?php
 
 return $twig->render('recipe/general.html.twig', array(
-    'log' => $brewLog,
+    'log' => $row_log,
     'page' => $page,
 ));
