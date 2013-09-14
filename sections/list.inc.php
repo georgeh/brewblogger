@@ -1,17 +1,21 @@
 <?php
 
-function getFileSizeW($file)
-{
-    $size  = getimagesize($file);
-    $width = $size[0];
-    return $width;
+if (!function_exists('getFileSizeW')) {
+    function getFileSizeW($file)
+    {
+        $size = getimagesize($file);
+        $width = $size[0];
+        return $width;
+    }
 }
 
-function getFileSizeH($fileH)
-{
-    $size   = getimagesize($fileH);
-    $height = $size[1];
-    return $height;
+if (!function_exists('getFileSizeH')) {
+    function getFileSizeH($fileH)
+    {
+        $size = getimagesize($fileH);
+        $height = $size[1];
+        return $height;
+    }
 }
 
 $pageVars = array(

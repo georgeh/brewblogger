@@ -46,6 +46,6 @@
 	
 </tr>
 <?php if ($color == $color1) { $color = $color2; } else { $color = $color1; } ?>
-<?php } while ($row_upcoming = mysql_fetch_assoc($upcoming)); ?>
+<?php } while ($row_upcoming = mysql_fetch_assoc($brew)); ?>
 </table>
 <?php } ?>

@@ -1,0 +1,17 @@
+<div id="sidebarWrapper">
+    <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}clock.png" align="absmiddle"></span><span class="data">{% if pref.mode == "2" %}{{ user2.realFirstName }}'s{% endif %}Brew Status</span></div>
+    <div id="sidebarInnerWrapper">
+        <table width="100%">
+            {% for status in statuses %}
+                <tr>
+                    <td class="listLeftAlign">
+                        {% if status.id != id %}<a href="index.php?page=brewBlogDetail&filter={status.brewBrewerID&id={{ status.id }}">{% endif %}
+                        {{ status.brewName_truncated }}
+                        {% if status.id != id %}</a>{% endif %}
+                    </td>
+                    <td class="listRightAlign">{{ status.brewStatus }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

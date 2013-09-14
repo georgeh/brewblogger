@@ -1,0 +1,41 @@
+{% if awards is not empty %}
+<div id="sidebarWrapper">
+    <div id="sidebarHeader">Awards &amp; Competitions</div>
+    <div id="sidebarInnerWrapper">
+        {% for award in awards %}
+        <table width="100%" >
+            <tr>
+                <td width="5%" class="dataLabelLeft">Entry Name:</td>
+                <td width="90%" class="data">{{ award.awardBrewName }}</td>
+                <td width="5%" rowspan="5"><img src="{{ image_src }}{% if award.awardPlace == "best" %}award_star_gold_3.png{% elseif award.awardPlace == "1" %}medal_gold_3.png{% elseif award.awardPlace == "2" %}medal_silver_3.png{% elseif award.awardPlace == "3" %}medal_bronze_3.png{% elseif award.awardPlace == "entry" %}tag_blue.png{% else %}star.png{% endif %}" border="0"/></td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Competition:</td>
+                <td class="data">
+                    {% if award.awardContestURL is not empty %}
+                        <a href="{{ award.awardContestURL }}" target="_blank">{{ award.awardContest }}</a>
+                    {% else %}
+                        {{ award.awardContest }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Date:</td>
+                <td class="data">{{ award.awardDate|date("M j, Y") }}</td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Style:</td>
+                <td class="data">{{ award.awardStyle }}</td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Place:</td>
+                <td class="data">{% if award.awardPlace == "best" %}Best In Show{% elseif award.awardPlace == "1" %}1st (Gold){% elseif award.awardPlace == "2" %}"2nd (Silver){% elseif award.awardPlace == "3" %}3rd (Bronze){% elseif award.awardPlace == "honMen" %}Honorable Mention{% else %}Entry Only{% endif %}</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="padding-bottom: .8em;"></td>
+            </tr>
+        </table>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

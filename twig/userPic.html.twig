@@ -1,0 +1,13 @@
+{% if member.userPicURL is not empty %}
+    <div align="center">
+        <img class="bdr1_dark" src="label_images/{{ member.userPicURL }}" {{ image_size }} border="0"
+             title="{{ member.realFirstName }} {{ member.realLastName }}"
+             alt="{{ member.realFirstName }} {{ member.realLastName }}" width="{{ width }}" height="{{ height }}">
+    </div>
+    {% if (height >= 150) and (width >= 200) %}
+        <div class="center dataLeft">
+            <p><a href="label_images/{{ member.userPicURL }}"
+                  title="{{ member.realFirstName }} {{ member.realLastName }}" class="thickbox">View Full Size</a></p>
+        </div>
+    {% endif %}
+{% endif %}

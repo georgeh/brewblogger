@@ -1,0 +1,126 @@
+{% if user_can_edit %}
+<script type="text/javascript" src="admin/js_includes/rounded-corners.js"></script>
+<script type="text/javascript" src="admin/js_includes/form-field-tooltip.js"></script>
+<script type="text/javascript" src="admin/js_includes/calendar_control.js"></script>
+<link rel="stylesheet" href="admin/css/tooltip.css" media="screen" type="text/css">
+<link rel="stylesheet" href="admin/css/calendar_control.css" media="screen" type="text/css">
+<form action="admin/process.php?action=editPub&dbTable={{ db_table }}&filter={{ filter }}&section=public&id={{ log.id }}" method="POST" name="form1">
+<div id="sidebarWrapper">
+    <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}user_go.png" align="absmiddle"></span><span class="data">Admin Actions</span></div>
+    <div id="sidebarInnerWrapper">
+        <table class="dataTable">
+            <tr>
+                <td class="data-icon_list"><a href="admin/index.php?action=edit&dbTable={{ db_table }}&id={{ log.id }}"><img src="{{ image_src }}pencil.png" alt="Edit {{ log.brewName }}" title="Edit {{ log.brewName }}" border="0" align="absmiddle"></a></td>
+                <td class="data-icon_list"><a href="admin/index.php?action=reuse&dbTable={{ db_table }}&filter={{ filter }}&id={{ log.id }}"><img src="{{ image_src }}page_refresh.png" alt="Reuse/Copy {{ log.brewName }}" title="Reuse/Copy {{ log.brewName }}" border="0" align="absmiddle"></a></td>
+                <td class="data-icon_list"><a href="admin/index.php?action=import{% if db_table is not empty %}&dbTable={{ db_table }}{% endif %}&id={{ log.id }}"><img src="{{ image_src }}page_lightning.png" alt="Import {{ log.brewName }} to {{ page_type_name }}" title="Import {{ log.brewName }} to {{ page_type_name }}" border="0" align="absmiddle"></a></td>
+                <td class="data-icon_list"><a href="admin/index.php?action=calculate&source={{ db_table }}&filter={{ filter }}&results=false&id={{ log.id }}"><img src="{{ image_src }}calculator.png" alt="Recalculate {{ log.brewName }}" title="Recalculate {{ log.brewName }}" border="0" align="absmiddle"></a></td>
+                <td class="data-icon_list"><a href="admin/index.php?action=add&dbTable=awards&assoc={{ db_table }}&filter={{ filter }}&id={{ log.id }}"><img src="{{ image_src }}medal_gold_3.png" alt="Add Awards for {{ log.brewName }}" title="Add Awards for {{ log.brewName }}" border="0" align="absmiddle"></a></td>
+                {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}
+                <td class="data-icon_list"><a href="entry.php?style={{ log.brewStyle }}&filter={% if pref.mode == "2" %}{{ filter }}{% else %}{{ login_username }}{% endif %}&id={{ log.id }}&KeepThis=true&TB_iframe=true&height=450&width=700" class="thickbox"><img src="{{ image_src }}award_star_add.png" alt="Add Awards for {{ log.brewName }}" title="Print a contest entry sheet for {{ log.brewName }}" border="0" align="absmiddle"></a></td>
+                {% endif %}
+                <td class="data">&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="sidebarWrapper">
+    <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}page_edit.png" align="absmiddle"></span><span class="data">Quick Edit</span></div>
+    <div id="sidebarInnerWrapper">
+        <table class="dataTable quickEdit2">
+            <tr>
+                <td class="dataLabelLeft">Name:</td>
+                <td class="data" {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}colspan="3"{% endif %}><input  name="brewName" type="text" value="{{ log.brewName }}" size="20"></td>
+                <td class="data"></td>
+                <td class="data"></td>
+            </tr>
+            {% if user.userLevel == "1" %}
+            <tr>
+                <td class="dataLabelLeft">Feat.?</td>
+                <td class="data" colspan="3">
+                    <input type="radio" name="brewFeatured" value="Y" id="brewFeatured_0" {% if log.brewFeatured == "Y" %}checked="checked"{% endif %} />Yes&nbsp;<input type="radio" name="brewFeatured" value="No" id="brewFeatured_1" {% if log.brewFeatured != "Y" %}checked="checked"{% endif %} />No</td>
+            </tr>
+            {% endif %}
+            {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}
+            <tr>
+                <td class="dataLabelLeft">Status:</td>
+                <td class="data" colspan="3">
+                <select name="brewStatus" id="brewStatus">
+                    {% for status in ['Primary','Secondary','Tertiary','Lagering','Conditioning','On Tap','Bottled','Planned'] %}
+                    <option value="{{ status }}" {% if log.brewStatus == status %}selected="selected"{% endif %}>{{ status }}</option>
+                    {% endfor %}
+                    <option value="" {% if log.brewStatus is empty %}selected="selected"{% endif %}>Gone</option>
+                </select>        </td>
+                <td class="data"></td>
+                <td class="data"></td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Batch:</td>
+                <td class="data" colspan="3"><input name="brewBatchNum" type="text"  value="{{ log.brewBatchNum }}" size="15"></td>
+                <td class="data"></td>
+                <td class="data"></td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Brew:</td>
+                <td class="data" colspan="3"><input name="brewDate" type="text" id="brewDate" value="{{ log.brewDate }}" size="15"  onfocus="showCalendarControl(this);"></td>
+                <td class="data"></td>
+                <td class="data"></td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Tap:</td>
+                <td class="data" colspan="3"><input name="brewTapDate" type="text" id="brewTapDate" value="{{ log.brewTapDate }}" size="15"  onfocus="showCalendarControl(this);"></td>
+                <td class="data"></td>
+                <td class="data"></td>
+            </tr>
+            {% endif %}
+
+            <tr>
+                <td class="dataLabelLeft">OG:</td>
+                <td class="data"><input name="brewOG" type="text" value="{{ log.brewOG }}" size="5" tooltipText="{{ tooltip_gravity }}"></td>
+                {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}
+                <td class="dataLabel">Target OG:</td>
+                <td class="data"><input name="brewTargetOG" type="text" value="{{ log.brewTargetOG }}" size="5" tooltipText="{{ tooltip_gravity }}"></td>
+                {% endif %}
+            </tr>
+            {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}
+            <tr>
+                <td class="dataLabelLeft">Read 1:</td>
+                <td class="data"><input name="brewGravity1" type="text" id="brewGravity1" value="{{ log.brewGravity1 }}" size="5" tooltipText="{{ tooltip_gravity }}"></td>
+                <td class="dataLabel">Days:</td>
+                <td class="data"><input name="brewGravity1Days" type="text" id="brewGravity1Days" value="{{ log.brewGravity1Days }}" size="5"></td>
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">Read 2:</td>
+                <td class="data"><input name="brewGravity2" type="text" id="brewGravity2" value="{{ log.brewGravity2 }}" size="5" tooltipText="{{ tooltip_gravity }}"></td>
+                <td class="dataLabel">Days:</td>
+                <td class="data"><input name="brewGravity2Days" type="text" id="brewGravity2Days" value="{{ log.brewGravity2Days }}" size="5"></td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="dataLabelLeft">FG:</td>
+                <td class="data"><input name="brewFG" type="text"  value="{{ log.brewFG }}" size="5" tooltipText="{{ tooltip_gravity }}"></td>
+                {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}
+                <td class="dataLabel">Target FG:</td>
+                <td class="data"><input name="brewTargetFG" type="text" value="{{ log.brewTargetFG }}" size="5" tooltipText="{{ tooltip_gravity }}"></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="dataLabelLeft">&nbsp;</td>
+                <td class="data" {% if page in ['brewBlogDetail', 'brewBlogCurrent'] %}colspan="3"{% endif %}><input type="submit" value="Update" class="update-button"></td>
+                <td class="data"></td>
+                <td class="data"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</form>
+{% endif %}
+
+<script type="text/javascript">
+    var tooltipObj = new DHTMLgoodies_formTooltip();
+    tooltipObj.setTooltipPosition('below');
+    tooltipObj.setPageBgColor('#ffffff');
+    tooltipObj.setTooltipCornerSize(6);
+    tooltipObj.initFormFieldTooltip();
+</script>
+

@@ -1,0 +1,15 @@
+{% if upcoming is not empty %}
+<div id="sidebarWrapper">
+    <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}time.png" align="absmiddle"></span><span class="data">{% if pref.mode == "2" %}{{ user2.realFirstName }}'s {% endif %}Upcoming Brews</span></div>
+    <div id="sidebarInnerWrapper" >
+        <table>
+            {% for beer in upcoming %}
+            <tr>
+                <td class="listLeftAlign">{% if beer.upcomingRecipeID is not empty %}<a href="index.php?page=recipeDetail&filter={{ beer.brewBrewerID }}&id={{ beer.upcomingRecipeID }}">{% endif %}{{ beer.upcoming_truncated }}{% if beer.upcomingRecipeID is not empty %}</a>{% endif %}</td>
+                <td class="listRightAlign">{% if beer.upcomingDate is not empty %}{{ beer.upcomingDate|date("M j, Y") }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endif %}

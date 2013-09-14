@@ -157,81 +157,29 @@ if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
         if ($row_pref['allowPrintXML'] == "Y") $topSidebar .= include(SECTIONS . 'printXML.inc.php');
     }
 
-    ob_start();
-    include(SECTIONS . 'quick_edit.inc.php');
-    $bottomSidebar .= ob_get_clean();
+    $bottomSidebar .= include(SECTIONS . 'quick_edit.inc.php');
 
-    if (checkmobile()) echo ""; else {
-        // Include sidebar sections according to preferences
-        if ($row_pref['allowLabel'] == "Y") {
-            ob_start();
-            include(SECTIONS . 'label.inc.php');
-            $bottomSidebar .= ob_get_clean();
-        }
-    }
-    if ($row_pref['allowAwards'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'awards.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    if ($row_pref['allowRelated'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'related.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    ob_start();
-    include(SECTIONS . 'list.inc.php');
-    $bottomSidebar .= ob_get_clean();
-    if ($row_pref['allowStatus'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'status.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    if ($row_pref['allowUpcoming'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'upcoming.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
+    if (!checkmobile() && $row_pref['allowLabel'] == "Y") $bottomSidebar .= include(SECTIONS . 'label.inc.php');
+    if ($row_pref['allowAwards'] == "Y") $bottomSidebar .= include(SECTIONS . 'awards.inc.php');
+    if ($row_pref['allowRelated'] == "Y") $bottomSidebar .= include(SECTIONS . 'related.inc.php');
+
+    $bottomSidebar .= include(SECTIONS . 'list.inc.php');
+
+    if ($row_pref['allowStatus'] == "Y") $bottomSidebar .= include(SECTIONS . 'status.inc.php');
+    if ($row_pref['allowUpcoming'] == "Y") $bottomSidebar .= include(SECTIONS . 'upcoming.inc.php');
 }
 if ($page == "recipeDetail") {
     // Include sidebar sections according to preferences
-    if ($row_pref['allowPrintRecipe'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'printRecipe.inc.php');
-        echo "&nbsp;";
-        $bottomSidebar .= ob_get_clean();
-    }
-    if ($row_pref['allowPrintXML'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'printXML.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    {
-        ob_start();
-        include(SECTIONS . 'quick_edit.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    if ($row_pref['allowAwards'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'awards.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    if ($row_pref['allowRelated'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'related.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
-    if ($row_pref['allowList'] == "Y") {
-        ob_start();
-        include(SECTIONS . 'list.inc.php');
-        $bottomSidebar .= ob_get_clean();
-    }
+    if ($row_pref['allowPrintRecipe'] == "Y") $bottomSidebar .= include(SECTIONS . 'printRecipe.inc.php');
+    if ($row_pref['allowPrintXML'] == "Y") $bottomSidebar .= include(SECTIONS . 'printXML.inc.php');
+    $bottomSidebar .= include(SECTIONS . 'quick_edit.inc.php');
+    if ($row_pref['allowAwards'] == "Y") $bottomSidebar .= include(SECTIONS . 'awards.inc.php');
+    if ($row_pref['allowRelated'] == "Y") $bottomSidebar .= include(SECTIONS . 'related.inc.php');
+    if ($row_pref['allowList'] == "Y") $bottomSidebar .= include(SECTIONS . 'list.inc.php');
 }
 
 if ($page == "profile") {
-    ob_start();
-    include(SECTIONS . 'userPic.inc.php');
-    $bottomSidebar .= ob_get_clean();
+    $bottomSidebar .= include(SECTIONS . 'userPic.inc.php');
 }
 
 $tplVars['topSidebar']    = $topSidebar;

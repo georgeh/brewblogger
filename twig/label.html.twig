@@ -1,0 +1,11 @@
+{% if label_image_exists %}
+<div id="sidebarWrapper">
+    <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}picture.png" align="texttop"></span><span class="data">Bottle Label</span></div>
+    <div id="sidebarInnerWrapper">
+        <div align="center"><img {% if img_w >= 225 %}class="labelImage"{% endif %} src="label_images/{{ log.brewLabelImage }}" border="0" alt="The {{ log.brewName }} Label" title="The {{ log.brewName }} Label" ></div>
+        {% if (img_h >= 150) or (img_w >= 225) %}
+        <div class="center dataLeft"><a href="label_images/{{ log.brewLabelImage }}" class="thickbox">View Full Size</a></div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
