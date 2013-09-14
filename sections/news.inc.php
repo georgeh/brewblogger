@@ -10,6 +10,7 @@ $pageVars = array(
 );
 
 do {
+    if (empty($row_news)) continue;
     $post = $row_news;
     $post['truncated_text'] = truncate_string($row_news['newsText'],500,'...');
     $pageVars['news'][] = $post;

@@ -73,16 +73,12 @@ $tplVars['page']         = $page;
 $tplVars['section']      = $section;
 $tplVars['printBrowser'] = $printBrowser;
 
-ob_start();
-include INCLUDES . 'navigation.inc.php';
-$tplVars['navigation'] = ob_get_clean();
+$tplVars['navigation'] = include INCLUDES . 'navigation.inc.php';
 
 $tplVars['breadcrumb']        = $breadcrumb;
 $tplVars['totalRows_newsGen'] = $totalRows_newsGen;
 
-ob_start();
-include SECTIONS . 'news.inc.php';
-$tplVars['news'] = ob_get_clean();
+$tplVars['news'] = include SECTIONS . 'news.inc.php';
 
 $tplVars['imageSrc'] = $imageSrc;
 $tplVars['icon']     = $icon;
@@ -185,9 +181,7 @@ if ($page == "profile") {
 $tplVars['topSidebar']    = $topSidebar;
 $tplVars['bottomSidebar'] = $bottomSidebar;
 
-ob_start();
-include(INCLUDES . 'footer.inc.php');
-$tplVars['footer'] = ob_get_clean();
+$tplVars['footer'] = include(INCLUDES . 'footer.inc.php');
 
 $tplVars['filter'] = isset($filter) ? $filter : null;
 $tplVars['user2']  = isset($row_user2) ? $row_user2 : null;

@@ -1,1 +1,6 @@
-Content &copy; <?php print date ( 'Y' )." ".$row_name['brewerFirstName']." ".$row_name['brewerLastName']." &mdash; BrewBlogger ".$version." developed by "; ?><a href="http://www.zkdigital.com" target="_blank">zkdigital.com</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.brewblogger.net" target="_blank"><img src="<?php echo $imageSrc; ?>link88x31.gif" alt="Download BrewBlogger" width="88" height="31" border="0" align="absmiddle"></a>
+<?php
+return $twig->render('includes/footer.html.twig', array(
+    'name' => $row_name,
+    'version' => $version,
+    'image_src' => $imageSrc,
+));
