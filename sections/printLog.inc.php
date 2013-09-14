@@ -1,1 +1,14 @@
-<?php if ($action == "scale") $scale = "Y"; else $scale = "N"; echo output_print_log($row_log['id'], "log", "brewing", "logPrint", $row_log['brewStyle'], $scale, $amt, $row_log['brewName'], $imageSrc, $row_colorChoose['themeName']); ?>
+<?php
+return $twig->render('printLog.html.twig', array(
+    'browser'   => (strstr($_SERVER['HTTP_USER_AGENT'], "MSIE")) ? 'IE' : 'notIE',
+    'id'        => $row_log['id'],
+    'source'    => 'log',
+    'db_table'  => "brewing",
+    'page'      => "logPrint",
+    'style'     => $row_log['brewStyle'],
+    'scale'     => ($action == "scale") ? 'Y' : 'N',
+    'amt'       => $amt,
+    'name'      => $row_log['brewName'],
+    'image_src' => $imageSrc,
+    'theme'     => $row_colorChoose['themeName'],
+));

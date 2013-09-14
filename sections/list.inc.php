@@ -24,7 +24,7 @@ $pageVars = array(
     'pg'        => $pg,
     'log'       => $row_log,
     'logged_in' => isset($_SESSION["loginUsername"]),
-    'user'      => $user,
+    'user'      => isset($user)?$user:array(),
     'user2'     => $row_user2,
     'name'      => $row_name,
 

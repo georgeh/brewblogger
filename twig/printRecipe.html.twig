@@ -1,0 +1,11 @@
+{% if browser == "IE" %}
+<a href="#" onClick="window.open('print.php?page={{ page }}&source={{ source }}&dbTable={{ db_table }}&brewStyle={{ style }}
+    {%- if scale == "Y" %}&action=scale&amt={{ amt }}{% endif -%}
+    &id={{ id }}view=print','','height=600,width=800,toolbar=no,resizable=yes,scrollbars=yes'); return false;" title="Print {{ name }}">
+{% else %}
+<a href="print.php?page={{ page }}&source={{ source }}&dbTable={{ db_table }}&brewStyle={{ style }}
+    {%- if scale == "Y" %}&action=scale&amt={{ amt }}{% endif -%}
+    &id={{ id }}&KeepThis=true&TB_iframe=true&height=450&width=700" title="Print {{ name }}" class="thickbox">
+{% endif %}
+
+<img src="{{ image_src }}{{ theme }}/button_print_recipe_{{ theme }}.png"  border="0" alt="print {{ source }}"></a>
