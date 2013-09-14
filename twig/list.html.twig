@@ -1,0 +1,122 @@
+{% if page == "about" %}
+    {% if logged_in and (user.userLevel == "1") %}
+        <span class="data-icon"><img src="{{ image_src }}/pencil.png" alt="Edit" border="0" align="absmiddle"></span>
+        <span class="data"><a href="admin/index.php?action=edit&dbTable=brewer&id=1"><span
+                        class="text_10">Edit {{ name.brewerFirstName }}'s Profile</span></span></a>
+    {% endif %}
+    {% if name.brewerImage is not empty %}
+        <div id="sidebarWrapper">
+            <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}picture.png"
+                                                             align="absmiddle"></span><span
+                                                             class="data">
+                    {%- if pref.mode == "1" %}{{ name.brewerFirstName }}'s Photo{% elseif pref.mode == "2" %}Club Logo{% endif %}</span>
+            </div>
+            <div id="sidebarInnerWrapper">
+                <div align="center">
+                    <img class="labelImage" src="label_images/{{ name.brewerImage }}" width="{{ img_w }} />
+                        {% if (img_h >= 150) and (img_w >= 200) %}
+                        <div id="labelImageEnlarge">
+                            <a href="label_images/{{ name.brewerImage }}" title="" class="thickbox">View Full Size</a>
+                        </div>
+                        {% endif %}
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if list is not empty %}
+        <div id="sidebarWrapper">
+            <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}link.png" align="absmiddle"></span><span
+                        class="data">
+                    {% if (pref.mode == "1") and (name.brewerFirstName is not empty) %}
+                        {{ name.brewerFirstName }}'s
+                    {% elseif pref.mode == "2" %}
+                        Club
+                    {% endif %}
+                    Links</span>
+            </div>
+            <div id="sidebarInnerWrapper">
+                <table>
+                    {% for item in list %}
+                        <tr>
+                            <td class="listLeftAlign"><a href="{{ item.brewerLinkURL }}"
+                                                         target="blank">{{ item.brewerLinkName_truncated }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <tr>
+                    <td colspan="2">
+                        <div align="center">{% if total > display %}{{ pagination }}{% endif %}</div>
+                    </td>
+                </tr>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    {% if pref.mode == "1" %}
+        <div id="sidebarWrapper">
+            <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}book.png" align="absmiddle"></span><span
+                        class="data">More {{ (page == "recipeDetail")?pref.menuRecipes:pref.menuBrewBlogs }}</span>
+            </div>
+            <div id="sidebarInnerWrapper">
+                <table width="100%">
+                    {% for item in list %}
+                        {% if list.brewArchive != "Y" %}
+                            <tr>
+                                <td class="listLeftAlign">
+                                    {% if item.id != log.id %}<a href="index.php?page={{ page }}&filter={{ item.brewBrewerID }}&id={{ item.id }}{% if pg is not empty %}&pg={{ pg }}{% endif %}">{% endif -%}
+                                        {{ (page == "recipeDetail")?item.brewName:item.brewName_truncated }}
+                                        {%- if list.id != log.id %}</a>{% endif %}
+                                </td>
+                                {% if page != "recipeDetail" %}
+                                    <td class="listRightAlign">{{ item.brewDate|date("M n, Y") }}</td>{% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    <tr>
+                        <td colspan="2">
+                            <div align="center">{% if total > display %}{{ pagination }}{% endif %}</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% elseif pref.mode == "2" %}
+        <div id="sidebarWrapper">
+        <div id="sidebarHeader"><span class="data-icon"><img src="{{ image_src }}book.png"
+                                                             align="absmiddle"></span><span
+                    class="data">{% if log.brewBrewerID is not empty %}{{ user2.realFirstName }}{% else %}Other{% endif %}{{ (page == "recipeDetail")?pref.menurecipes:pref.menuBrewBlogs }}</span>
+        </div>
+        <div id="sidebarInnerWrapper" >
+        <table width="100%">
+        <tr>
+            <td class="listLeftAlign"
+                {% if page == "brewBlogDetail" %}colspan="2"{% endif %}>{% if page == "recipeDetail" %}<a
+                        href="?page=brewBlogList&sort=brewDate&dir=DESC">All Club {{ pref.menuBrewBlogs }}</a>{% else %}
+                    <a href="?page=recipeList">All Club {{ pref.menuRecipes }}</a>{% endif %}</td>
+        </tr>
+        {% if (log.brewBrewerID is not empty) %}
+            {% for item in list %}
+                {% if list.brewArchive != "Y" %}
+                    <tr>
+                        <td class="listLeftAlign">
+                            {% if item.id != log.id %}<a href="index.php?page={{ page }}&&filter={{ item.brewBrewerID }}&id={{ item.id }}{% if pg is not empty %}&pg={{ pg }}{% endif %}">{% endif -%}
+                            {{ (page == "recipeDetail")?item.brewName:item.brewName_truncated }}
+                            {%- if item.id != log.id %}</a>{% endif %}
+                        </td>
+                        {% if page != "recipeDetail" %}
+                            <td class="listRightAlign">{{ item.brewDate|date("M n, Y") }}</td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <tr>
+        <td colspan="2"><div align="center">{% if total > display %}{{ pagination }}{% endif %}</div></td>
+    </tr>
+    </table>
+    </div>
+    </div>
+    {% endif %}
+{% endif %}
+

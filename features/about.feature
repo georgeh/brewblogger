@@ -7,3 +7,9 @@ Feature:
     When I am on the page "about"
     Then I should see "Dr. Joe B. Brewer II"
     And I should see "Anytown, Colorado USA"
+
+  Scenario: Links List
+    When I am on the page "about"
+    Then I should see "Beer Judge Certification Program (BJC..."
+    And I should see "BrewBlogger"
+    And I should see "John Palmer's How To Brew On..."

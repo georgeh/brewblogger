@@ -192,9 +192,7 @@ $tplVars['body'] = $content;
 $topSidebar    = '';
 $bottomSidebar = '';
 if ($page == "about") {
-    ob_start();
-    include(SECTIONS . 'list.inc.php');
-    $topSidebar .= ob_get_clean();
+    $topSidebar .= include(SECTIONS . 'list.inc.php');
 }
 if (($page == "brewBlogCurrent") || ($page == "brewBlogDetail")) {
     if (checkmobile()) echo ""; else {
