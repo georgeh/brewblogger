@@ -1,3 +1,6 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
 <div id="content-wide">
     {% if log_rows == 0 %}
         <table class="dataTable">
@@ -183,3 +186,4 @@
         {% endif %}
     {% endif %}
 </div>
+{% endblock %}

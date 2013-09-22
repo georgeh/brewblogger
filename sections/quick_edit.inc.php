@@ -8,7 +8,7 @@ $pageVars = array(
     'image_src'       => $imageSrc,
     'pref'            => $row_pref,
     'login_username'  => $loginUsername,
-    'user'            => $row_user,
+    'user'            => isset($row_user)?$row_user:array(),
     'tooltip_gravity' => $toolTip_gravity,
 
 );

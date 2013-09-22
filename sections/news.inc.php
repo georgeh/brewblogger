@@ -1,6 +1,5 @@
 <?php
 $pageVars = array(
-    'page' => $page,
     'news_count' => $totalRows_newsGen,
     'sort' => $sort,
     'dir' => $dir,

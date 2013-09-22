@@ -1,4 +1,7 @@
-{% set total = awards|length %}
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    {% set total = awards|length %}
 <div id="content-wide">
     {% if awards is empty %}
     <table class="dataTable">
@@ -92,3 +95,4 @@
 </table>
 </div>
 {% endif %}
+{% endblock %}

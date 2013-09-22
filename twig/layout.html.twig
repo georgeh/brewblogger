@@ -3,10 +3,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <meta name="description"
-          content="{{ name.brewerLogName }} is the homebrewing log and recipe collection of {{ brewerName }}. Powered by BrewBlogger {{ version }}.">
+          content="{{ name.brewerLogName }} is the homebrewing log and recipe collection of {{ name.brewerFirstName }} {{ name.brewerLastName }}. Powered by BrewBlogger {{ version }}.">
     <meta name="robots" content="index,follow,noarchive">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <title>{{ title }}</title>
+    <title>
+        {% block title %}
+            {% if pref.mode == "1" %}
+                {{ name.brewerFirstName }}'s BrewBlog &gt; {{ page_title }} {{ page_title_extension }}
+            {% elseif pref.mode == "2" %}
+                {{ name.brewerFirstName }} {{ name.brewerLogName }} &gt; {{ page_title }} {{ page_title_extension }}
+            {% endif %}
+        {% endblock %}
+    </title>
     <link rel="stylesheet" href="css/universal_elements.css" type="text/css">
 
     {% if checkmobile %}
@@ -35,18 +43,22 @@
     <!-- End Header -->
     <!-- Begin Main Content -->
     <div id="content-wrapper">
-        <div id="{% block contentId "content-wide" %}">
-            <div id="{% block breadcrumbId "breadcrumbWide" %}">{{ breadcrumb }}</div>
+        <div id="{% block content_id "content-wide" %}">
+            <div id="{% block breadcrumb_id "breadcrumbWide" %}">{{ breadcrumb }}</div>
             {% if pref.mode == 2 and pref.home == page and pref.allowNews == "y" and totalRows_newsGen > 0 %}{{ news }}{% endif %}
-            <div id="{% block subtitleId "subtitleWide" %}">
-                <div id="icon"><img src="{{ imageSrc }}{{ icon }}.png" align="bottom"></div>
+            <div id="{% block subtitle_id "subtitleWide" %}">
+                <div id="icon"><img src="{{ image_src }}{{ icon }}.png" align="bottom"></div>
                 {% block page_title page_title %}
             </div>
             <!-- end subtitle or subtitleWide -->
-            {{ body }}
+            {% block body %}{% endblock %}
         </div>
         <!-- End left-column -->
-        {% block sidebar %}{% endblock %}
+        {% if block('sidebar') is not empty %}
+            <div id="right-column">
+                {% block sidebar %}{% endblock %}
+            </div><!-- End right-column -->
+        {% endif %}
     </div>
     <!-- End contentWrapper -->
     <!-- End Main Content -->

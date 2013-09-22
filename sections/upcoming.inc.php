@@ -1,6 +1,5 @@
 <?php
 $pageVars = array(
-    'image_src' => $imageSrc,
     'upcoming'  => array(),
     'pref'      => $row_pref,
     'user2'     => $row_user2,
@@ -16,15 +15,18 @@ if ($row_pref['mode'] == "2") {
 
 do {
     if (empty($row_upcoming)) continue;
-//    // Get brewer ids
-//    mysql_select_db($database_brewing, $brewing);
-//    $query_brewerID = sprintf("SELECT * FROM recipes WHERE id = '%s'", $row_upcoming['upcomingRecipeID']);
-//    $brewerID = mysql_query($query_brewerID, $brewing) or die(mysql_error());
-//    $row_brewerID       = mysql_fetch_assoc($brewerID);
-//    $totalRows_brewerID = mysql_num_rows($brewerID);
+    // Get brewer ids
+    mysql_select_db($database_brewing, $brewing);
+    $query_brewerID = sprintf("SELECT * FROM recipes WHERE id = '%s'", $row_upcoming['upcomingRecipeID']);
+    $brewerID = mysql_query($query_brewerID, $brewing) or die(mysql_error());
+    $row_brewerID       = mysql_fetch_assoc($brewerID);
+    $totalRows_brewerID = mysql_num_rows($brewerID);
 
     $brew = $row_upcoming;
-//    $brew += $row_brewerID;
+    if ($row_brewerID) {
+        $brew = array_merge($brew, $row_brewerID);
+    }
+
     $brew['upcoming_truncated'] = truncate_string($row_upcoming['upcoming'], 25, '...');
     $pageVars['upcoming'][]     = $brew;
 

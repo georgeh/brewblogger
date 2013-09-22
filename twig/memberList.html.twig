@@ -13,7 +13,8 @@
         <td width="34%" class="dataList">{% if member.userInfoPrivate == "Y" %}<a
                     href="index.php?page=profile&filter={{ member.user_name|url_encode }}">{% endif -%}
                 {{ member.realFirstName }} {{ member.realLastName }}
-                {%- if member.userInfoPrivate == "Y" %}</a>{% if member.userPosition != "" %}
+                {%- if member.userInfoPrivate == "Y" %}</a>{% endif %}
+            {% if member.userPosition != "" %}
             <span class="text_9">&nbsp;&nbsp;<em>{{ member.userPosition }}</em></span>{% endif %}</td>
         <td class="dataList">{{ member.brewingTotal }}&nbsp;&nbsp;</td>
         <td width="25%" class="dataList">{% if member.brewingTotal > 0 %}<a

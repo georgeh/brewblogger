@@ -1,3 +1,6 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
 <a class="webcalSubscribe" href="webcal://{{ ical_url }}{% if filter is not empty %}?filter={{ filter|url_encode }}{% endif %}">Subscribe
     to Calendar</a>
 {% if pref.mode == "2" %}
@@ -133,3 +136,4 @@
         </td>
     </tr>
 </table>
+{% endblock %}

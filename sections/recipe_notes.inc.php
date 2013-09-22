@@ -1,4 +1,2 @@
 <?php
-return $twig->render('recipe/notes.html.twig', array(
-    'log' => $brewLog,
-));
+return $twig->render('recipe/notes.html.twig');

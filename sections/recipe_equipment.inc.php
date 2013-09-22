@@ -41,8 +41,6 @@ if ($row_log['brewEquipProfile'] != "") {
 }
 
 return $twig->render('recipe/equipment.html.twig', array(
-    'pref' => $row_pref,
-    'log' => $row_log,
     'equip_profile' => $equip,
 ));
 

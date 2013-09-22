@@ -1,11 +1,7 @@
 <?php
 
 $pageVars = array(
-    'image_src' => $imageSrc,
-    'page' => $page,
-    'filter' => $filter,
     'id' => $id,
-    'log' => $row_log,
     'color1' => $color1,
     'color2' => $color2,
     'reviews' => array(),

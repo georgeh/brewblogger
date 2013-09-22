@@ -19,19 +19,12 @@ if (!function_exists('getFileSizeH')) {
 }
 
 $pageVars = array(
-    'image_src' => $imageSrc,
-    'page'      => $page,
-    'pref'      => $row_pref,
     'list'      => array(),
     'total'     => $total,
     'display'   => $display,
     'pg'        => $pg,
-    'log'       => $row_log,
     'logged_in' => isset($_SESSION["loginUsername"]),
     'user'      => isset($user)?$user:array(),
-    'user2'     => $row_user2,
-    'name'      => $row_name,
-
 );
 
 ob_start();
@@ -47,7 +40,10 @@ do {
         $truncationLength = 100;
     }
     $item['brewName_truncated'] = truncate_string($row_list['brewName'], $truncationLength, '...');
-    $item['brewerLinkName_truncated'] = truncate_string($row_list['brewerLinkName'], $truncationLength, '...');
+    if (isset($row_list['brewerLinkName'])) {
+        $item['brewerLinkName_truncated'] = truncate_string($row_list['brewerLinkName'], $truncationLength, '...');
+    }
+
     $pageVars['list'][]         = $item;
 } while($row_list = mysql_fetch_assoc($list));
 

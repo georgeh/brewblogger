@@ -4,7 +4,7 @@ $pageVars = array(
     'pref'               => $row_pref,
     'totalRows_awardGen' => $totalRows_awardGen,
     'logged_in'          => isset($_SESSION["loginUsername"]),
-    'user'               => $row_user,
+    'user'               => isset($row_user)?$row_user:array(),
 );
 
 ob_start();

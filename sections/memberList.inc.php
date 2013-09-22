@@ -3,7 +3,6 @@ $pageVars = array(
     'color1'  => $color1,
     'color2'  => $color2,
     'members' => array(),
-    'image_src' => $imageSrc,
 );
 
 do {

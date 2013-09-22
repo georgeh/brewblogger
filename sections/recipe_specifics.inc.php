@@ -1,4 +1,6 @@
 <?php
+
+
 mysql_select_db($database_brewing, $brewing);
 $query_styles = sprintf("SELECT * FROM styles WHERE brewStyle='%s'", $row_log['brewStyle']);
 $styles = mysql_query($query_styles, $brewing) or die(mysql_error());
@@ -54,9 +56,7 @@ if ($row_log['brewFG'] != "") {
 }
 
 $pageVars = array(
-    'page'          => $page,
     'style_count'   => $totalRows_styles,
-    'image_src'     => $imageSrc,
     'style_include' => $styleInclude,
     'user2'         => $row_user2,
     'action'        => $action,

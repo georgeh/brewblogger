@@ -1,8 +1,6 @@
 <?php
 $pageVars = array(
-    'pref'          => $row_pref,
     'ical_url'      => $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . 'ical.php',
-    'filter'        => !empty($filter)?$filter:'',
     'override_date' => false,
 );
 

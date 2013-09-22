@@ -1,7 +1,6 @@
 <?php
 $pageVars = array(
     'id' => $id,
-    'image_src' => $imageSrc,
     'statuses' => array(),
 );
 

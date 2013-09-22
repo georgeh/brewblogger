@@ -13,10 +13,10 @@ $totalRows_count2 = mysql_num_rows($count2);
 
 
 return $twig->render('profile.html.twig', array(
-    'filter'        => $filter,
-    'image_src'     => $imageSrc,
-    'pref'          => $row_pref,
     'brewing_count' => $totalRows_count1,
     'recipe_count'  => $totalRows_count2,
     'member'        => $row_members,
 ));
+
+// Sidebar
+$bottomSidebar .= include(SECTIONS . 'userPic.inc.php');

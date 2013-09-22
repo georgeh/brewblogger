@@ -19,7 +19,6 @@ if (!function_exists('getFileSizeH')) {
 
 $pageVars = array(
     'label_image_exists' => false,
-    'log' => $row_log,
 );
 $filename = IMAGES_DIR."/label_images/".$row_log['brewLabelImage'];
 

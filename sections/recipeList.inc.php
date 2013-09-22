@@ -1,17 +1,13 @@
 <?php
 $pageVars = array(
     'total'          => $total,
-    'filter'         => $filter,
-    'pref'           => $row_pref,
     'db_name'        => $dbName,
     'style'          => $style,
-    'login_username' => $_SESSION['loginUsername'],
-    'checkmobile'    => checkmobile(),
+    'login_username' => isset($_SESSION['loginUsername'])?$_SESSION['loginUsername']:null,
     'sort'           => $sort,
     'view'           => $view,
     'pg'             => $pg,
-    'user'           => $row_user,
-    'login_username' => $_SESSION["loginUsername"],
+    'user'           => isset($row_user)?$row_user:array(),
     'includes'       => INCLUDES,
     'dir'            => $dir,
     'destination'    => $destination,
@@ -19,7 +15,6 @@ $pageVars = array(
     'color1'         => $color1,
     'color2'         => $color2,
     'display'        => $display,
-    'page'           => $page,
     'source'         => $source,
 );
 if ($totalRows_featured > 0) {

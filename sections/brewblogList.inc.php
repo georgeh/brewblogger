@@ -6,8 +6,6 @@ $pageVars = array(
 
 if ($totalRows_log > 0) {
     $pageVars += array(
-        'checkmobile'   => checkmobile(),
-        'pref'          => $row_pref,
         'featured_rows' => $totalRows_featured,
         'db_name'       => $dbName,
         'includes'      => INCLUDES,
@@ -29,17 +27,13 @@ if ($totalRows_log > 0) {
 
     $pageVars += array(
         'style'          => $style,
-        'log'            => $row_log,
-        'page'           => $page,
         'sort'           => $sort,
         'dir'            => $dir,
         'view'           => $view,
         'pg'             => $pg,
-        'user2'          => $user2,
         'total'          => $total,
         'display'        => $display,
         'login_username' => isset($_SESSION['loginUsername']) ? $_SESSION['loginUsername'] : null,
-        'img_src'        => $imageSrc,
         'color1'         => $color1,
         'color2'         => $color2,
     );

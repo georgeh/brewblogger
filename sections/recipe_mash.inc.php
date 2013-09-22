@@ -1,7 +1,5 @@
 <?php
-$pageVars = array(
-    'pref' => $row_pref,
-);
+$pageVars = array();
 
 if (($row_pref['mashDisplayMethod'] == "1") && ($row_log['brewMashProfile'] != "")) {
     $mash = $row_mash_profiles;
@@ -81,5 +79,4 @@ if (($row_pref['mashDisplayMethod'] == "2") || (($row_pref['mashDisplayMethod'] 
     }
 }
 
-$pageVars['log'] = $row_log;
 return $twig->render('recipe/mash.html.twig', $pageVars);

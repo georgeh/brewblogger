@@ -1,16 +1,12 @@
 <?php
 
 $pageVars = array(
-    'filter'         => $filter,
     'view'           => $view,
     'display'        => $display,
-    'image_src'      => $imageSrc,
     'sort'           => $sort,
     'dir'            => $dir,
     'pg'             => $pg,
-    'pref'           => $row_pref,
     'user'           => $user,
-    'user2'          => isset($user2) ? : null,
     'login_username' => isset($_SESSION["loginUsername"]) ? : null,
     'color1'         => $color1,
     'color2'         => $color2,
