@@ -5,6 +5,7 @@
 //}
 
 // content
+$content = '';
 if ($row_pref['allowSpecifics'] == "Y") $content .= include SECTIONS . 'recipe_specifics.inc.php';
 if ($row_pref['allowGeneral'] == "Y") $content .= include SECTIONS . 'recipe_general.inc.php';
 if ($row_pref['allowComments'] == "Y") $content .= include SECTIONS . 'recipe_comments.inc.php';
@@ -18,6 +19,7 @@ if ($row_pref['allowFermentation'] == "Y") $content .= include SECTIONS . 'recip
 if (!checkmobile() && $row_pref['allowReviews'] == "Y") $content .= include SECTIONS . 'recipe_reviews.inc.php';
 
 // Sidebar
+$topSidebar = '';
 if (!checkmobile()) {
     // Include printing, BeerXML buttons according to preferences
     if ($row_pref['allowPrintLog'] == "Y") $topSidebar .= include(SECTIONS . 'printLog.inc.php');
@@ -25,7 +27,7 @@ if (!checkmobile()) {
     if ($row_pref['allowPrintXML'] == "Y") $topSidebar .= include(SECTIONS . 'printXML.inc.php');
 }
 
-$bottomSidebar .= include(SECTIONS . 'quick_edit.inc.php');
+$bottomSidebar = include(SECTIONS . 'quick_edit.inc.php');
 
 if (!checkmobile() && $row_pref['allowLabel'] == "Y") $bottomSidebar .= include(SECTIONS . 'label.inc.php');
 if ($row_pref['allowAwards'] == "Y") $bottomSidebar .= include(SECTIONS . 'awards.inc.php');

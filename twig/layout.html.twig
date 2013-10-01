@@ -35,11 +35,10 @@
 <div id="main-container">
     <!-- Begin Header -->
     <div id="header">
-        <div class="titleText">{{ name.brewerFirstName }}{% if pref.mode == 1 and name.brewerFirstName %}'s{% endif %}
-            &nbsp;{{ name.brewerLogName }}</div>
+        <div class="titleText">{{ name.brewerFirstName }}{% if pref.mode == 1 and name.brewerFirstName %}'s{% endif %}&nbsp;{{ name.brewerLogName }}</div>
         <div class="quoteText">{{ name.brewerTagline }}</div>
     </div>
-    <div id="nav">{{ navigation }}</div>
+    <div id="nav">{% include "includes/navigation.html.twig" %}</div>
     <!-- End Header -->
     <!-- Begin Main Content -->
     <div id="content-wrapper">
@@ -64,7 +63,7 @@
     <!-- End Main Content -->
 
     <!-- Begin Footer -->
-    <div id="footer">{{ footer }}</div>
+    <div id="footer">{% include "includes/footer.html.twig" %}</div>
     <!-- End Footer -->
 </div>
 <!-- End Main Container -->

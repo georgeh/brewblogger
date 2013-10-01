@@ -96,7 +96,13 @@
             <li><strong><span class="ultra_lt">{{ pref.menuAbout }}</span></strong></li>
         {% endif %}
     {% endif %}
-    {{ session_authenticate_nav }}
+    {% if logged_in %}
+        <li><div class="menuBar"><a class="menuButton" href="admin/index.php" onmouseover="buttonMouseover(event, 'publicMenu2')">Admin</a></div></li>
+        <li><a href="includes/logout.inc.php">{{ pref.menuLogout }}</a></li>
+    {% else %}
+        <li><a href="index.php?page=login">{{ pref.menuLogin }}</a></li>
+    {% endif %}
+
 </ul>
 
 <div id="publicMenu0" class="menu">
