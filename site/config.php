@@ -10,14 +10,14 @@ INSERT YOUR USERNAME BETWEEN THE DOUBLE-QUOTATION MARKS ("").
 For example, if your username is fred then the line should read $username_brewblog = "fred".
 */
 
-$username_brewblog = "root";
+$username_brewblog = "brewblogger";
 
 /* 
 INSERT YOUR PASSWORD BETWEEN THE DOUBLE-QUOTATION MARKS ("").
 For example, if your password is flintstone then the line should read $password_brewblog = "flintsone".
 */
 
-$password_brewblog = "";
+$password_brewblog = "brewblogger";
 
 /*
 The following line is the name of your MySQL database you set up already.  
@@ -37,5 +37,3 @@ $brewblog = mysql_connect($hostname_brewblog, $username_brewblog, $password_brew
 Do not change the following line.
 */
 $brewing = $brewblog; 
-
-?>
