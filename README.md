@@ -9,3 +9,5 @@ The plan of attack is:
 5. Extract functionality from controller and global functions into objects where it makes sense
 
 As the development progresses, I'll initially be writing [Behat](http://behat.org/) tests to confirm I haven't broken anything. Once the project is more stabilized, I'll be writing [PHPUnit](https://github.com/sebastianbergmann/phpunit/) unit tests and adding CI.
+
+[![Build Status](https://travis-ci.org/georgeh/brewblogger.png?branch=refactor)](https://travis-ci.org/georgeh/brewblogger)
