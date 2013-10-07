@@ -6,7 +6,8 @@ php:
 services: mysql
 
 install:
-  - php composer.phar install --dev --no-interaction
+  - composer self-update
+  - composer install --dev --no-interaction
 
 before_script:
   - mysql -e 'create database brewblogger;'
