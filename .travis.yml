@@ -18,10 +18,10 @@ before_script:
   - mysql -u root brewblogger -e 'UPDATE preferences SET mode=2;'
 
   # Update Behat Path
-  - "sed -i -e 's,base_url: http://localhost/brewblogger/,base_url: http://localhost/,g' behat.yml"
+  - "sed -i -e 's,base_url: http://localhost/brewblogger/,base_url: http://localhost:8000/,g' behat.yml"
 
   # Start up the server
-  - php -S localhost:80 &
+  - php -S localhost:8000 &
   - sleep 3
 
 script:
