@@ -510,7 +510,7 @@ $row_awardsList = mysql_fetch_assoc($awardsList);
 
 
 
-function paginate($display, $pg, $total) {
+function paginateAwards($display, $pg, $total) {
   /* make sure pagination doesn't interfere with other query string variables */
   if(isset($_SERVER['QUERY_STRING']) && trim(
     $_SERVER['QUERY_STRING']) != '') {
