@@ -34,7 +34,7 @@ else {
 function checkmobile(){
 	if(isset($_SERVER["HTTP_X_WAP_PROFILE"])) return true;
 	
-	if(preg_match("/wap\.|\.wap/i",$_SERVER["HTTP_ACCEPT"])) return true;
+	if(isset($_SERVER["HTTP_ACCEPT"]) && preg_match("/wap\.|\.wap/i",$_SERVER["HTTP_ACCEPT"])) return true;
 	
 	// Quick Array to kill out matches in the user agent that might cause false positives
 	if(isset($_SERVER["HTTP_USER_AGENT"])) {
