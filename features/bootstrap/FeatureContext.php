@@ -65,9 +65,9 @@ class FeatureContext extends MinkContext
     {
         $actual = $this->getSession()->getCurrentUrl();
         $params = parse_url($actual, PHP_URL_QUERY);
-        parse_str($params);
-        if (!isset($params['page']) || ($params['page'] == $page)) {
-            $message = sprintf("Current BrewBlogger page %s not found in current url %s\nparams: %s", $page, $actual, print_r($params, true) );
+        parse_str($params, $paramsArr);
+        if (!isset($paramsArr['page']) || ($paramsArr['page'] == $page)) {
+            $message = sprintf("Current BrewBlogger page %s not found in current url %s\nparams: %s", $page, $actual, print_r($paramsArr, true) );
             throw new ExpectationException($message, $this->getSession());
         }
     }
