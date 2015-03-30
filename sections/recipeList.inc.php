@@ -26,9 +26,7 @@ if ($totalRows_featured > 0) {
 }
 
 if ($total > $display) {
-    ob_start();
-    paginate($display, $pg, $total);
-    $pageVars['pagination'] = ob_get_clean();
+    $pageVars['pagination'] = paginate($display, $pg, $total);
 }
 
 $pageVars['recipes'] = array();

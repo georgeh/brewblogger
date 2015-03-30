@@ -6,15 +6,12 @@ $pageVars = array(
     'sort'           => $sort,
     'dir'            => $dir,
     'pg'             => $pg,
+    'paginate'       => paginateAwards($display, $pg, $total),
     'user'           => $user,
     'login_username' => isset($_SESSION["loginUsername"]) ? : null,
     'color1'         => $color1,
     'color2'         => $color2,
 );
-
-ob_start();
-paginate($display, $pg, $total);
-$pageVars['paginate'] = ob_get_clean();
 
 $pageVars['awards'] = array();
 do {

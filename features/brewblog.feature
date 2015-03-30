@@ -55,9 +55,3 @@ Scenario: Status
   Given I am on the page "brewBlogDetail&filter=admin&id=1"
   Then I should see "Brew Status"
   And I should see "Sample Log #2 Bottled"
-
-Scenario: Upcoming
-  Given I am on the page "brewBlogDetail&filter=admin&id=1"
-  Then I should see "Joe's Upcoming Brews"
-  And I should see "Orange Krush Sep 14, 2009"
-  And I should see "60 Minute Ticker Oct 14, 2009"

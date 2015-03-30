@@ -12,11 +12,8 @@ if ($totalRows_log > 0) {
         'user_level'    => $row_user['userLevel'],
         'destination'   => $destination,
         'source'        => $source,
+        'paginate'      => paginateBrewBlogList($display, $pg, $total),
     );
-
-    ob_start();
-    paginate($display, $pg, $total);
-    $pageVars['paginate'] = ob_get_clean();
 
     // Needs to be in the middle because I don't know what side-effects that include has
     if ($totalRows_featured > 0) {
