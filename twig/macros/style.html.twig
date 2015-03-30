@@ -1,0 +1,175 @@
+{% macro style(style, sort = "") %}
+{% if (sort is not empty) and (style[sort] is not empty) %}
+
+
+<div id="referenceHeader">{{ style.brewStyle }} &mdash; BJCP Style Information</div>
+<table>
+    <tr>
+        <td class="dataLabelLeft">Category:</td>
+        <td class="data">
+            {% if style.brewStyleGroup == "01" %}
+                Light Lager
+            {% elseif style.brewStyleGroup == "02" %}
+                Pilsner
+            {% elseif style.brewStyleGroup == "03" %}
+                European Amber Lager
+            {% elseif style.brewStyleGroup == "04" %}
+                Dark Lager
+            {% elseif style.brewStyleGroup == "05" %}
+                Bock
+            {% elseif style.brewStyleGroup == "06" %}
+                Light Hybrid Beer
+            {% elseif style.brewStyleGroup == "07" %}
+                Amber Hybrid Beer
+            {% elseif style.brewStyleGroup == "08" %}
+                English Pale Ale
+            {% elseif style.brewStyleGroup == "09" %}
+                Scottish and Irish Ale
+            {% elseif style.brewStyleGroup == "10" %}
+                American Ale
+            {% elseif style.brewStyleGroup == "11" %}
+                English Brown Ale
+            {% elseif style.brewStyleGroup == "12" %}
+                Porter
+            {% elseif style.brewStyleGroup == "13" %}
+                Stout
+            {% elseif style.brewStyleGroup == "14" %}
+                India Pale Ale (IPA)
+            {% elseif style.brewStyleGroup == "15" %}
+                German Wheat and Rye Beer
+            {% elseif style.brewStyleGroup == "16" %}
+                Belgian and French Ale
+            {% elseif style.brewStyleGroup == "17" %}
+                Sour Ale
+            {% elseif style.brewStyleGroup == "18" %}
+                Belgian Strong Ale
+            {% elseif style.brewStyleGroup == "19" %}
+                Strong Ale
+            {% elseif style.brewStyleGroup == "20" %}
+                Fruit Beer
+            {% elseif style.brewStyleGroup == "21" %}
+                Spice/Herb/Vegetable Beer
+            {% elseif style.brewStyleGroup == "22" %}
+                Smoke-Flavored and Wood-Aged Beer
+            {% elseif style.brewStyleGroup == "23" %}
+                Specialty Beer
+            {% elseif style.brewStyleGroup == "24" %}
+                Traditional Mead
+            {% elseif style.brewStyleGroup == "25" %}
+                Melomel (Fruit Mead)
+            {% elseif style.brewStyleGroup == "26" %}
+                Other Mead
+            {% elseif style.brewStyleGroup == "27" %}
+                Standard Cider and Perry
+            {% elseif style.brewStyleGroup == "28" %}
+                Specialty Cider and Perry
+            {% endif %}
+            ?>
+        </td>
+    </tr>
+    </tr>
+    <td class="dataLabelLeft">Number:</td>
+    <td class="data">{{ style.brewStyleGroup }}{{ style.brewStyleNum }}</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>{{ style.brewStyleInfo }}</td>
+    </tr>
+</table>
+
+<table class="dataTable">
+    <tr>
+        <td class="dataHeadingLeft">OG</td>
+        <td class="dataHeading">FG</td>
+        <td class="dataHeading">ABV</td>
+        <td class="dataHeading">Bitterness</td>
+        <td class="dataHeading">Color (SRM/EBC)</td>
+    </tr>
+    <tr>
+        <td nowrap="nowrap" class="dataLeft">
+            {% if style.brewStyleOG is not empty %}
+            {{ style.brewStyleOG }} &ndash; {{ style.brewStyleOGMax }}
+            {% else %}
+            Varies
+            {% endif %}
+        </td>
+        <td nowrap="nowrap" class="data">
+            {% if style.brewStyleFG is not empty %}
+                {{ style.brewStyleFG }} &ndash; {{ style.brewStyleFGMax }}
+            {% else %}
+                Varies
+            {% endif %}
+        </td>
+        <td nowrap="nowrap" class="data">
+            {% if style.brewStyleABV is not empty %}
+                {{ style.brewStyleABV }} &ndash; {{ style.brewStyleABVMax }}%
+            {% else %}
+                Varies
+            {% endif %}
+        </td>
+        <td nowrap="nowrap" class="data">
+            {% if style.brewStyleIBU == "" %}
+                Varies
+            {% elseif style.brewSTyleIBU == "N/A" %}
+                N/A
+            {% else %}
+                {{ style.brewStyleIBU }} &ndash; {{ style.brewStyleIBUMax }} IBU
+            {% endif %}
+        </td>
+        <td nowrap="nowrap" class="data">
+            <?php	include (INCLUDES.'colorStyle.inc.php');
+      if ($row_styles['brewStyleSRM'] == "") {
+	echo "Varies";
+      } elseif ($row_styles['brewStyleSRM'] == "N/A") {
+	echo "N/A";
+      } elseif ($row_styles['brewStyleSRM'] != "") {
+	$SRMmin    = ltrim ($row_styles['brewStyleSRM'], "0");
+	$SRMmax    = ltrim ($row_styles['brewStyleSRMMax'], "0");
+	$fontColor = ($SRMmin > "15") ? "#ffffff" : "#000000";
+            echo '
+            <table width="80">
+                <tr>
+                    <td width="48%">
+                        <table class="colorTable">
+                            <tr>
+                                <td style="color: ' . $fontColor . '; background: ' . $beercolorMin . ';">';
+                                    echo $SRMmin . '/' . round(srm_to_ebc($SRMmin), 0) . '
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="4%">&nbsp;&ndash;&nbsp;</td>
+                    <td width="48%">';
+                        $fontColor = ($SRMmax > "15") ? "#ffffff" : "#000000";
+                        echo '
+                        <table class="colorTable">
+                            <tr>
+                                <td style="color: ' . $fontColor . '; background: ' . $beercolorMax . ';">';
+                                    echo $SRMmax . '/' . round(srm_to_ebc($SRMmax), 0) . '
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            ';
+            } else {
+            echo "&nbsp;";
+            }
+            ?>
+        </td>
+    </tr>
+</table>
+
+<?php if ($page == "reference") { ?>
+<table style="margin-bottom: 10px;">
+    <tr>
+        <td><a href="<?php echo $row_styles['brewStyleLink']; ?>" target="_blank">More Info</a> (link to Beer Judge
+            Certification Program Style Guidelines)
+        </td>
+    </tr>
+</table>
+<?php }
+{% endif %}
