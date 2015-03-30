@@ -120,7 +120,7 @@ $row_log = mysql_fetch_assoc($log);
 }
 
 
-function paginate($display, $pg, $total) {
+function paginateBrewBlogList($display, $pg, $total) {
   /* make sure pagination doesn't interfere with other query string variables */
   if(isset($_SERVER['QUERY_STRING']) && trim(
     $_SERVER['QUERY_STRING']) != '') {
