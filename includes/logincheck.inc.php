@@ -61,7 +61,7 @@ session_start();
 
   		// If the username/password combo is OK, relocate to the "protected" content index page
         $port = (80 === $_SERVER['SERVER_PORT'])?'':':' . $_SERVER['SERVER_PORT'];
-  		header("Location: http://" . $_SERVER['SERVER_NAME'] . $port . dirname(dirname($_SERVER['SCRIPT_NAME'])) . "/admin/index.php");
+  		header("Location: http://" . $_SERVER['SERVER_NAME'] . $port . dirname(dirname($_SERVER['SCRIPT_NAME'])) . "admin/index.php");
   		exit;
 	}
 else {

@@ -29,7 +29,7 @@ $pageVars = array(
 );
 
 do {
-    if (empty($row_list)) continue;
+    if (empty($row_list) || !isset($row_list['brewName'])) continue;
 
     $item             = $row_list;
     $truncationLength = 40;
