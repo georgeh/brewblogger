@@ -29,14 +29,16 @@ $pageVars = array(
 );
 
 do {
-    if (empty($row_list) || !isset($row_list['brewName'])) continue;
-
+    if (empty($row_list) || (!isset($row_list['brewName']) && !isset($row_list['brewerLinkName']))) continue;
     $item             = $row_list;
     $truncationLength = 40;
     if ($page != "recipeDetail" && $page != 'about') {
         $truncationLength = 100;
     }
-    $item['brewName_truncated'] = truncate_string($row_list['brewName'], $truncationLength, '...');
+    if (isset($row_list['brewName'])) {
+        $item['brewName_truncated'] = truncate_string($row_list['brewName'], $truncationLength, '...');
+    }
+
     if (isset($row_list['brewerLinkName'])) {
         $item['brewerLinkName_truncated'] = truncate_string($row_list['brewerLinkName'], $truncationLength, '...');
     }
