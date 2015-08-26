@@ -47,54 +47,54 @@
         <table class="dataTable">
             <tr>
                 {% if login_username is not empty %}
-                    <td class="dataList" width="1%"><img src="{{ img_src }}pencil.png" border="0" align="absmiddle">
+                    <td class="dataList" width="1%"><img src="{{ image_src }}pencil.png" border="0" align="absmiddle">
                     </td>{% endif %}
                 {% if not checkmobile %}
                     <td class="dataHeadingList" width="1%">XML</td>{% endif %}
                 <td class="dataHeadingList" width="25%">{{ db_name }}{% if not checkmobile %}&nbsp;<a
                             href="?page={{ page|url_encode }}&sort=brewName&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                                src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                                src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewName&dir=DESC&filter={{ filter|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 <td class="dataHeadingList" width="10%">Date{% if not checkmobile %}&nbsp;<a
                         href="?page={{ page|url_encode }}&sort=brewDate&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                            src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                            src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewDate&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 <td class="dataHeadingList" width="25%">Style{% if not checkmobile %}&nbsp;<a
                         href="?page={{ page|url_encode }}&sort=brewStyle&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                            src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                            src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewStyle&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 <td class="dataHeadingList" width="10%">Method{% if not checkmobile %}&nbsp;<a
                         href="?page={{ page|url_encode }}&sort=brewMethod&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                            src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                            src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewMethod&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 <td class="dataHeadingList"
                     width="10%">{% if pref.measColor == "EBC" %}EBC{% else %}SRM{% endif %}{% if not checkmobile %}&nbsp;
                         <a href="?page={{ page|url_encode }}&sort=brewLovibond&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                                    src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                                    src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewLovibond&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 <td class="dataHeadingList" width="5%">IBU{% if not checkmobile %}&nbsp;<a
                         href="?page={{ page|url_encode }}&sort=brewBitterness&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                            src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                            src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewBitterness&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 <td class="dataHeadingList" width="5%">ABV{% if not checkmobile %}&nbsp;<a
                         href="?page={{ page|url_encode }}&sort=brewOG&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                            src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                            src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                             href="?page={{ page|url_encode }}&sort=brewOG&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                        <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
+                        <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}</td>
                 {% if (pref.mode == "2") and (filter == "all") %}
                     <td class="dataHeadingList">Contributor{% if not checkmobile %}&nbsp;<a
                         href="?page={{ page|url_encode }}&sort=brewBrewerID&dir=ASC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}"><img
-                            src="{{ img_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
+                            src="{{ image_src }}sort_up.gif" border="0" alt="Sort Ascending"></a><a
                         href="?page={{ page|url_encode }}&sort=brewBrewerID&dir=DESC&filter={{ filter|url_encode }}&style={{ style|url_encode }}&view={{ view | url_encode }}">
-                    <img src="{{ img_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}
+                    <img src="{{ image_src }}sort_down.gif" border="0" alt="Sort Descending"></a>{% endif %}
                     </td>{% endif %}
-                <td class="dataHeadingList center" width="1%"><img src="{{ img_src }}medal_gold_3.png" border="0"
+                <td class="dataHeadingList center" width="1%"><img src="{{ image_src }}medal_gold_3.png" border="0"
                                                                    alt="Awards/Competition Entires" align="baseline">
                 </td>
             </tr>
@@ -104,7 +104,7 @@
                         {% if user_level == "1" or login_username == log.brewBrewerID %}
                             <td class="dataList">
                                 <a href="admin/index.php?action=edit&dbTable=brewing&id={{ log.id }}"><img
-                                            src="{{ img_src }}pencil.png" alt="Edit {{ log.brewName }}"
+                                            src="{{ image_src }}pencil.png" alt="Edit {{ log.brewName }}"
                                             title="Edit {{ log.brewName }}" border="0" align="absmiddle"></a>
                             </td>
                         {% elseif login_username is not empty %}
@@ -114,7 +114,7 @@
                         <td class="dataList">
                             <a href="#"
                                onclick="window.open('{{ includes }}output_beer_xml.inc.php?id={{ log.id|url_encode }}&source={{ source|url_encode }}&brewStyle={{ log.brewStyle|url_encode }}','','height=1,width=1, scrollbars=no, toolbar=no, resizable==no, menubar=no'); return false;"><img
-                                        src="{{ img_src }}page_white_code.png" title="Download BeerXML"
+                                        src="{{ image_src }}page_white_code.png" title="Download BeerXML"
                                         align="absmiddle" border="0"/></a>
                             {% endif %}
                         <td class="dataList"><a
