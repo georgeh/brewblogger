@@ -1,3 +1,5 @@
+{% extends "layout.html.twig" %}
+{% block body %}
 <table>
     {% if not checkmobile %}
     <?php if (!checkmobile()) { ?>
@@ -38,4 +40,4 @@
         {%- endif -%}
     {%- endfor %}
 </div>
-
+{% endblock %}
