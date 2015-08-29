@@ -20,7 +20,7 @@ $pageVars = array(
 if ($totalRows_featured > 0) {
     if (($row_pref['mode'] == "1") || (($row_pref['mode'] == "2") && ($filter == "all"))) {
         ob_start();
-        include('featured.inc.php');
+        include(SECTIONS . '/featured.inc.php');
         $pageVars['featured'] = ob_get_clean();
     }
 }
@@ -59,7 +59,7 @@ do {
         $recipe['style'] = $row_styles;
         if ($totalRows_styles > 0) {
             ob_start();
-            include('reference/styles.inc.php');
+            include(REFERENCE . '/styles.inc.php');
             $recipe['style_include'] = ob_get_clean();
         }
 

@@ -27,7 +27,7 @@ do {
     $row_styles       = mysql_fetch_assoc($styles);
     $totalRows_styles = mysql_num_rows($styles);
     ob_start();
-    include('reference/styles.inc.php');
+    include(REFERENCE . '/styles.inc.php');
     $award['style_include'] = ob_get_clean();
 
     // Get real user names

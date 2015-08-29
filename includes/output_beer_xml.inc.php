@@ -1,6 +1,6 @@
 <?php require_once(CONFIG.'config.php'); 
-include('../includes/db_connect_universal.inc.php');
-include('../includes/functions.inc.php');
+include(INCLUDES . '/db_connect_universal.inc.php');
+include(INCLUDES . '/functions.inc.php');
 
 $colname_log = "-1";
 if (isset($_GET['id'])) {
