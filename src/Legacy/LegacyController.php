@@ -24,15 +24,24 @@ class LegacyController {
     $this->app = $app;
   }
   public function defaultRoute(Request $request) {
-    try {
-      ob_start();
-      include '../index.php';
-      $page = ob_get_contents();
-      ob_end_clean();
-    }
-    catch (Exception $e) {
-      var_dump($e);
-    }
+    ob_start();
+    include '../index.php';
+    $page = ob_get_contents();
+    ob_end_clean();
+    return $page;
+  }
+  public function login(Request $request) {
+    ob_start();
+    include '../includes/logincheck.inc.php';
+    $page = ob_get_contents();
+    ob_end_clean();
+    return $page;
+  }
+  public function admin(Request $request) {
+    ob_start();
+    include '../admin/index.php';
+    $page = ob_get_contents();
+    ob_end_clean();
     return $page;
   }
 }

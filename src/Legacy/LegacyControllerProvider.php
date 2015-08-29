@@ -18,6 +18,11 @@ class LegacyControllerProvider implements ControllerProviderInterface {
     $controllers = $app['controllers_factory'];
     $controllers->match('/', 'legacy.controller:defaultRoute')
       ->bind('legacy.default');
+    $controllers->match('/admin', 'legacy.controller:admin')
+      ->bind('legacy.admin');
+    $controllers->match('/admin/index.php', 'legacy.controller:admin');
+    $controllers->match('/login/check', 'legacy.controller:login')
+      ->bind('legacy.login');
     return $controllers;
   }
 
