@@ -1,0 +1,7 @@
+{% if browser == "IE" %}
+<a href="export/beerxml?id={{ id }}&source={{ source }}&brewStyle={{ style }}">
+{% else %}
+<a href="#" onclick="window.open('/export/beerxml?id={{ id }}&source={{ source }}&brewStyle={{ style }}','','height=5,width=5, scrollbars=no, toolbar=no, resizable==no, menubar=no'); return false;">
+{% endif %}
+
+<img src="{{ image_src }}{{ theme }}/button_beer_xml_{{ theme }}.png"  border="0" alt="Output to Beer XML"></a>

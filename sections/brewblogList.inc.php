@@ -18,7 +18,7 @@ if ($totalRows_log > 0) {
     // Needs to be in the middle because I don't know what side-effects that include has
     if ($totalRows_featured > 0) {
         ob_start();
-        include('featured.inc.php');
+        include(SECTIONS . '/featured.inc.php');
         $pageVars['featured'] = ob_get_clean();
     }
 
@@ -84,7 +84,7 @@ if ($totalRows_log > 0) {
             );
 
             ob_start();
-            include('reference/styles.inc.php');
+            include(REFERENCE . '/styles.inc.php');
             $brew['styles_inc'] = ob_get_clean();
 
             $brew['color_display_inc'] = '&nbsp;';

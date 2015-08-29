@@ -26,7 +26,7 @@
 <?php } ?>
 <li><div class="menuBar"><a class="menuButton" href="../index.php" onclick="../index.php" onmouseover="buttonMouseover(event, 'admin<?php if ($row_pref['mode'] == "1") echo "Menu6"; if ($row_pref['mode'] == "2") echo "Menu7"; ?>')">&lt;&lt; Back to<?php if (!checkmobile()) echo "..."; else echo " Main"; ?></a></div></li>
 
-<li><a href="../includes/logout.inc.php"><?php echo $row_pref['menuLogout']; ?></a></li>
+<li><a href="/logout"><?php echo $row_pref['menuLogout']; ?></a></li>
 </ul>
 <div id="adminMenu1" class="menu">
 	<?php if (($row_pref['mode'] == "2") && ($row_user['userLevel'] == "1")) { ?>
