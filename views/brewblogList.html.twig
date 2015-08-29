@@ -113,7 +113,7 @@
                         {% if not checkmobile %}
                         <td class="dataList">
                             <a href="#"
-                               onclick="window.open('{{ includes }}output_beer_xml.inc.php?id={{ log.id|url_encode }}&source={{ source|url_encode }}&brewStyle={{ log.brewStyle|url_encode }}','','height=1,width=1, scrollbars=no, toolbar=no, resizable==no, menubar=no'); return false;"><img
+                               onclick="window.open('/export/beerxml?id={{ log.id|url_encode }}&source={{ source|url_encode }}&brewStyle={{ log.brewStyle|url_encode }}','','height=1,width=1, scrollbars=no, toolbar=no, resizable==no, menubar=no'); return false;"><img
                                         src="{{ image_src }}page_white_code.png" title="Download BeerXML"
                                         align="absmiddle" border="0"/></a>
                             {% endif %}

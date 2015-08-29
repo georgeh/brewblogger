@@ -30,7 +30,7 @@ echo "<a href=\"index.php\">Administration</a>"; else echo "Administration"; ?> 
 </td>
 <?php if (!checkmobile()) { 
 if (($row_user['userLevel'] == "1") && (($action == "list") && (($dbTable == "brewing") || ($dbTable == "recipes")))) { ?>
-<td nowrap><div class="right"><a href="includes/excel_download.inc.php?dbTable=<?php echo $dbTable; ?>&filter=<?php echo $filter; ?>"><img src="<?php echo $imageSrc.$row_colorChoose['themeName']; ?>/button_export_excel_<?php echo $row_colorChoose['themeName']; ?>.png" border="0"></a>&nbsp;<?php if ($filter == "all")  echo "<a href=\"?action=exportSQL&dbTable=brewing\">"; if (($filter == $loginUsername) || ($row_user['userLevel'] == "1")) { ?><a href="index.php?action=exportSQL&dbTable=<?php echo $dbTable; ?>&filter=<?php echo $filter; ?>"><img src="<?php echo $imageSrc.$row_colorChoose['themeName']; ?>/button_export_sql_<?php echo $row_colorChoose['themeName']; ?>.png" border="0"></a><?php } ?></div></td>
+<td nowrap><div class="right"><a href="/export/csv?dbTable=<?php echo $dbTable; ?>&filter=<?php echo $filter; ?>"><img src="<?php echo $imageSrc.$row_colorChoose['themeName']; ?>/button_export_excel_<?php echo $row_colorChoose['themeName']; ?>.png" border="0"></a>&nbsp;<?php if ($filter == "all")  echo "<a href=\"?action=exportSQL&dbTable=brewing\">"; if (($filter == $loginUsername) || ($row_user['userLevel'] == "1")) { ?><a href="index.php?action=exportSQL&dbTable=<?php echo $dbTable; ?>&filter=<?php echo $filter; ?>"><img src="<?php echo $imageSrc.$row_colorChoose['themeName']; ?>/button_export_sql_<?php echo $row_colorChoose['themeName']; ?>.png" border="0"></a><?php } ?></div></td>
 <?php } 
 } ?>
 </tr>
