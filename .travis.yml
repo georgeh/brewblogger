@@ -26,5 +26,5 @@ before_script:
   - sleep 3
 
 script:
-  - ../vendor/bin/behat
+  - vendor/bin/behat
 #  - php vendor/bin/phpunit -c phpunit.xml.dist
