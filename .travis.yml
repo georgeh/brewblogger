@@ -1,3 +1,4 @@
+sudo: false
 language: php
 php:
   - "5.5"
@@ -21,9 +22,9 @@ before_script:
   - "sed -i -e 's,base_url: http://localhost/brewblogger/,base_url: http://localhost:8000/,g' behat.yml"
 
   # Start up the server
-  - php -S localhost:8000 &
+  - php -S localhost:8000 -t web/ &
   - sleep 3
 
 script:
-  - vendor/bin/behat
+  - ../vendor/bin/behat
 #  - php vendor/bin/phpunit -c phpunit.xml.dist
