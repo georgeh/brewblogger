@@ -8,7 +8,6 @@ require_once(CONFIG . 'config.php');
 //choose SQL table and set up functions to user authentication and
 //navbar configuration for login/logout links
 require(INCLUDES . 'authentication_nav.inc.php');
-session_start();
 
 //override various default settings with GET parameters, if they exist
 include(INCLUDES . 'url_variables.inc.php');

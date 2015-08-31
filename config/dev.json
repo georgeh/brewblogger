@@ -1,3 +1,10 @@
 {
+  "database": {
+    "driver":   "pdo_mysql",
+    "dbhost":   "localhost",
+    "dbname":   "brewblogger",
+    "user":     "brewblogger",
+    "password": "brewblogger"
+  },
   "debug": true
 }

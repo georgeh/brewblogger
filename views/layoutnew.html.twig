@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="description"
+          content="BrewBlogger 3.0">
+    <meta name="robots" content="index,follow,noarchive">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>
+        {% block title %}
+        BrewBlogger 3.0
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="css/universal_elements.css" type="text/css">
+
+        <script type="text/javascript" src="js_includes/menu.js"></script>
+        <script type="text/javascript" src="js_includes/jquery.js"></script>
+        <script type="text/javascript" src="js_includes/thickbox.js"></script>
+        <script type="text/javascript" src="js_includes/jump_menu.js"></script>
+        <link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/midas.css" type="text/css">
+
+    {% block head %}{% endblock %}
+</head>
+<body {% block bodyAttr %}{% endblock %}>
+
+<div id="main-container">
+    <!-- Begin Header -->
+    <div id="header">
+    </div>
+    {#<div id="nav">{% include "includes/navigation.html.twig" %}</div>#}
+    <!-- End Header -->
+    <!-- Begin Main Content -->
+    <div id="content-wrapper">
+        <div id="{% block content_id "content-wide" %}">
+            <div id="{% block subtitle_id "subtitleWide" %}">
+                {% block page_title %}
+                {% endblock %}
+            </div>
+            <!-- end subtitle or subtitleWide -->
+            {% block body %}{% endblock %}
+        </div>
+        <!-- End left-column -->
+        {% if block('sidebar') is not empty %}
+            <div id="right-column">
+                {% block sidebar %}{% endblock %}
+            </div><!-- End right-column -->
+        {% endif %}
+    </div>
+    <!-- End contentWrapper -->
+    <!-- End Main Content -->
+
+    <!-- Begin Footer -->
+    <div id="footer">{#{% include "includes/footer.html.twig" %}#}</div>
+    <!-- End Footer -->
+</div>
+<!-- End Main Container -->
+</body>
+</html>
