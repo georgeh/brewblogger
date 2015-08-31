@@ -35,7 +35,8 @@
     "doctrine/dbal": "2.2",
     "igorw/config-service-provider": "~1.2",
     "twig/twig": "1.*",
-    "symfony/twig-bridge": "~2.7"
+    "symfony/twig-bridge": "~2.7",
+    "symfony/security": "~2.7"
   },
 
   "autoload": {

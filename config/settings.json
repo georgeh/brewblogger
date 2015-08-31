@@ -1,7 +1,5 @@
 {
-  "database": {
-    "path": "app.db"
-  },
   "cache.lifetime": 300,
   "environment": "dev"
+
 }

@@ -4,7 +4,7 @@ $page = "admin";
 $imageSrc = "../images/";
 require ('../paths.php');
 require_once (CONFIG.'config.php'); 
-require (INCLUDES.'authentication.inc.php'); session_start(); sessionAuthenticate();
+require (INCLUDES.'authentication.inc.php'); sessionAuthenticate();
 
 //override various default settings with GET parameters, if they exist
 include (INCLUDES.'url_variables.inc.php');

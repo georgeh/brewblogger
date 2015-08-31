@@ -1,38 +1,18 @@
-{% extends "layout.html.twig" %}
+{% extends "layoutnew.html.twig" %}
+
 
 {% block body %}
-<div class="include">
-    <form action="/login/check" method="POST" name="form1" id="form1">
-
-        {% if section == "loginError" %}
-            <table class="dataTable">
-                <tr>
-                    <td class="error">Sorry, there was a problem with your last login attempt. Please try again.</td>
-                </tr>
-            </table>
-        {% elseif section == "loggedout" %}
-            <table class="dataTable">
-                <tr>
-                    <td class="error">You have been logged out.</td>
-                </tr>
-            </table>
+{% if is_granted('ROLE_USER') %}
+    <p>Welcome {{ app.security.token.user.username }}!</p>
+    <p><a href="{{ path('logout') }}">Log out</a></p>
+{% else %}
+    <form action="/user/login_check" method="post">
+        <p><label for="username">Username: </label><input id="username" type="text" name="_username" value="{{ last_username }}"></p>
+        <p><label for="password">Password: </label><input id="password" type="password" name="_password"></p>
+        <p><input type="submit" value="Log in"></p>
+        {% if error %}
+            <div class="error">{{ error }}</div>
         {% endif %}
-        <table class="dataTable">
-            <tr>
-                <td class="dataLabelLeft">Username:</td>
-                <td class="data"><input name="loginUsername" type="text" class="submit" size="25"></td>
-            </tr>
-            <tr>
-                <td class="dataLabelLeft">Password:</td>
-                <td class="data"><input name="loginPassword" type="password" class="submit" size="25"></td>
-            </tr>
-            <tr>
-                <td class="dataLabel">&nbsp;</td>
-                <td class="data"><input type="image" name="login" id="submit"
-                                        src="{{ image_src }}{{ color_choose.themeName }}/button_login_{{ color_choose.themeName }}.png"
-                                        alt="Login" class="radiobutton" value="Login"></td>
-            </tr>
-        </table>
     </form>
-</div>
+{% endif %}
 {% endblock %}

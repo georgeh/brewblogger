@@ -98,9 +98,9 @@
     {% endif %}
     {% if logged_in %}
         <li><div class="menuBar"><a class="menuButton" href="admin/index.php" onmouseover="buttonMouseover(event, 'publicMenu2')">Admin</a></div></li>
-        <li><a href=/logout">{{ pref.menuLogout }}</a></li>
+        <li><a href="/user/logout">{{ pref.menuLogout }}</a></li>
     {% else %}
-        <li><a href="index.php?page=login">{{ pref.menuLogin }}</a></li>
+        <li><a href="/user/login">{{ pref.menuLogin }}</a></li>
     {% endif %}
 
 </ul>
