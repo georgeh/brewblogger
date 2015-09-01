@@ -10,12 +10,12 @@
  */
 
 
-namespace BrewBlogger\BrewRecipe;
+namespace BrewBlogger\Recipe;
 use BrewBlogger\Application;
-use BrewBlogger\BrewRecipe\BrewRecipeRepository;
+use BrewBlogger\Recipe\RecipeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-class BrewRecipeController {
+class RecipeController {
   /**
    * @var Application
    */
