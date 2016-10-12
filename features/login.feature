@@ -7,5 +7,5 @@ Scenario: Login
   Given I am on the page "login"
   When I fill in "username" with "nonpriv"
   And I fill in "password" with "user"
-  And I press "submit"
+  And I press "Log in"
   Then I should be on "/"
