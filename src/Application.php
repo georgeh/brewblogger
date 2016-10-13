@@ -125,7 +125,7 @@ class Application extends SilexApplication {
 
       ),
       'security.role_hierarchy' => array(
-        'ROLE_ADMIN' => 'ROLE_USER',
+        'ROLE_ADMIN' => array('ROLE_USER'),
       ),
       'security.access_rules' => array(
         array('^/login$', 'IS_AUTHENTICATED_ANONYMOUSLY'),
