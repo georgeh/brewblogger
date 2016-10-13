@@ -5,7 +5,7 @@ Feature:
 
 Scenario: Login
   Given I am on the page "login"
-  When I fill in "loginUsername" with "nonpriv"
-  And I fill in "loginPassword" with "user"
-  And I press "submit"
-  Then I should be on "/admin/index.php"
+  When I fill in "username" with "nonpriv"
+  And I fill in "password" with "user"
+  And I press "Log in"
+  Then I should be on "/"

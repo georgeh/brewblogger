@@ -10,8 +10,8 @@
  */
 
 namespace BrewBlogger;
-use BrewBlogger\BrewRecipe\BrewRecipeControllerProvider;
-use BrewBlogger\BrewRecipe\BrewRecipeServiceProvider;
+use BrewBlogger\Recipe\RecipeControllerProvider;
+use BrewBlogger\Recipe\RecipeServiceProvider;
 use BrewBlogger\Legacy\LegacyControllerProvider;
 use BrewBlogger\Legacy\LegacyServiceProvider;
 use BrewBlogger\User\UserControllerProvider;
@@ -83,7 +83,7 @@ class Application extends SilexApplication {
 
   }
   protected function registerServices(Application $app) {
-    $app->register(new BrewRecipeServiceProvider());
+    $app->register(new RecipeServiceProvider());
     $app->register(new LegacyServiceProvider());
     $app->register(new UserServiceProvider());
     $app['user.repository'] = $app->share(function($app) {
@@ -125,7 +125,7 @@ class Application extends SilexApplication {
 
       ),
       'security.role_hierarchy' => array(
-        'ROLE_ADMIN' => 'ROLE_USER',
+        'ROLE_ADMIN' => array('ROLE_USER'),
       ),
       'security.access_rules' => array(
         array('^/login$', 'IS_AUTHENTICATED_ANONYMOUSLY'),
@@ -136,7 +136,7 @@ class Application extends SilexApplication {
     ]);
   }
   protected function registerRoutes(Application $app) {
-    $app->mount('/', new BrewRecipeControllerProvider());
+    $app->mount('/', new RecipeControllerProvider());
     $app->mount('/', new LegacyControllerProvider());
     $app->mount('/user', new UserControllerProvider());
   }

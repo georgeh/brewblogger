@@ -11,14 +11,14 @@
         BrewBlogger 3.0
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="css/universal_elements.css" type="text/css">
+    <link rel="stylesheet" href="{{ app.request.basepath }}/css/universal_elements.css" type="text/css">
 
-        <script type="text/javascript" src="js_includes/menu.js"></script>
-        <script type="text/javascript" src="js_includes/jquery.js"></script>
-        <script type="text/javascript" src="js_includes/thickbox.js"></script>
-        <script type="text/javascript" src="js_includes/jump_menu.js"></script>
-        <link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="css/midas.css" type="text/css">
+        <script type="text/javascript" src="{{ app.request.basepath }}/js_includes/menu.js"></script>
+        <script type="text/javascript" src="{{ app.request.basepath }}/js_includes/jquery.js"></script>
+        <script type="text/javascript" src="{{ app.request.basepath }}/js_includes/thickbox.js"></script>
+        <script type="text/javascript" src="{{ app.request.basepath }}/js_includes/jump_menu.js"></script>
+        <link rel="stylesheet" href="{{ app.request.basepath }}/css/thickbox.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="{{ app.request.basepath }}/css/midas.css" type="text/css">
 
     {% block head %}{% endblock %}
 </head>
@@ -27,8 +27,10 @@
 <div id="main-container">
     <!-- Begin Header -->
     <div id="header">
+        <div class="titleText">BrewBlogger 3.0</div>
+        <div class="quoteText">Brews for all</div>
     </div>
-    {#<div id="nav">{% include "includes/navigation.html.twig" %}</div>#}
+    <div id="nav">{#{% include 'includes/navigation.html.twig' %}#}</div>
     <!-- End Header -->
     <!-- Begin Main Content -->
     <div id="content-wrapper">
@@ -51,7 +53,7 @@
     <!-- End Main Content -->
 
     <!-- Begin Footer -->
-    <div id="footer">{#{% include "includes/footer.html.twig" %}#}</div>
+    <div id="footer">{#}{% include 'includes/footer.html.twig' %}#}</div>
     <!-- End Footer -->
 </div>
 <!-- End Main Container -->

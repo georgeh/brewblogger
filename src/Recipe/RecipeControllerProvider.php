@@ -9,10 +9,10 @@
  * @copyright Samuel Leathers, 28 August, 2015
  */
 
-namespace BrewBlogger\BrewRecipe;
+namespace BrewBlogger\Recipe;
 use Silex\ControllerProviderInterface;
 use Silex\Application;
-class BrewRecipeControllerProvider implements ControllerProviderInterface {
+class RecipeControllerProvider implements ControllerProviderInterface {
   public function connect(Application $app) {
     /** @var \Silex\ControllerCollection $controllers */
     $controllers = $app['controllers_factory'];
